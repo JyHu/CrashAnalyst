@@ -84,6 +84,11 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Reload dSYMs" keyEquivalent="R" id="wO2-PF-3ul">
+                                            <connections>
+                                                <action selector="reloadDSyms:" target="Voe-Tx-rLC" id="lnk-CG-ttN"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
@@ -841,7 +846,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="324"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="WuK-ac-eG3">
+                                        <textView focusRingType="none" importsGraphics="NO" richText="NO" verticallyResizable="YES" fieldEditor="YES" continuousSpellChecking="YES" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textReplacement="YES" spellingCorrection="YES" smartInsertDelete="YES" id="WuK-ac-eG3">
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="324"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>

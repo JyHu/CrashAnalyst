@@ -27,6 +27,7 @@
 		66AB9889258CBD9C000ACE57 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9888258CBD9C000ACE57 /* MainSplitViewController.swift */; };
 		66AB988C258CBDFD000ACE57 /* AnalysisSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */; };
 		66AB9890258CC235000ACE57 /* IntHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB988F258CC235000ACE57 /* IntHelper.swift */; };
+		66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9898258DA98F000ACE57 /* FileTips.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		66AB9888258CBD9C000ACE57 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisSplitViewController.swift; sourceTree = "<group>"; };
 		66AB988F258CC235000ACE57 /* IntHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntHelper.swift; sourceTree = "<group>"; };
+		66AB9898258DA98F000ACE57 /* FileTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTips.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				66AB986B258C97A0000ACE57 /* Tools.swift */,
 				66AB9863258C9754000ACE57 /* dSYMManager.swift */,
 				66AB9864258C9755000ACE57 /* dSYMModel.swift */,
+				66AB9898258DA98F000ACE57 /* FileTips.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				66AB9848258C8CC3000ACE57 /* HistoriesViewController.swift in Sources */,
 				66AB9890258CC235000ACE57 /* IntHelper.swift in Sources */,
 				66AB9869258C978C000ACE57 /* StringHelper.swift in Sources */,
+				66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */,
 				66AB9851258C8D58000ACE57 /* AddressAnalysisViewController.swift in Sources */,
 				66AB9865258C9755000ACE57 /* dSYMManager.swift in Sources */,
 				66AB985A258C8E07000ACE57 /* MainWindowController.swift in Sources */,
@@ -369,6 +373,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.auu.CrashAnalysis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -390,6 +395,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.auu.CrashAnalysis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

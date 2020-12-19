@@ -39,6 +39,12 @@ class FileAnalysisViewController: NSViewController {
         if let reg = try? NSRegularExpression(pattern: versionPattern, options: options) {
             versionReg = reg
         }
+        
+        guard let attributedString = FileTips.fileTips else {
+            return
+        }
+        
+        textView.textStorage?.setAttributedString(attributedString)
     }
     
     @IBAction func openAddressAnalysisAction(_ sender: NSButton) {
