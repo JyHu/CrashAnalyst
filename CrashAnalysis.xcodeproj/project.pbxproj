@@ -29,6 +29,7 @@
 		66AB9890258CC235000ACE57 /* IntHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB988F258CC235000ACE57 /* IntHelper.swift */; };
 		66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9898258DA98F000ACE57 /* FileTips.swift */; };
 		66AB98A8258DB95F000ACE57 /* MatrixAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */; };
+		66AB98AB258DCD88000ACE57 /* CrashContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB98AA258DCD88000ACE57 /* CrashContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		66AB988F258CC235000ACE57 /* IntHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntHelper.swift; sourceTree = "<group>"; };
 		66AB9898258DA98F000ACE57 /* FileTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTips.swift; sourceTree = "<group>"; };
 		66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixAnalysisViewController.swift; sourceTree = "<group>"; };
+		66AB98AA258DCD88000ACE57 /* CrashContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				66AB9863258C9754000ACE57 /* dSYMManager.swift */,
 				66AB9864258C9755000ACE57 /* dSYMModel.swift */,
 				66AB9898258DA98F000ACE57 /* FileTips.swift */,
+				66AB98AA258DCD88000ACE57 /* CrashContent.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				66AB9851258C8D58000ACE57 /* AddressAnalysisViewController.swift in Sources */,
 				66AB98A8258DB95F000ACE57 /* MatrixAnalysisViewController.swift in Sources */,
 				66AB9865258C9755000ACE57 /* dSYMManager.swift in Sources */,
+				66AB98AB258DCD88000ACE57 /* CrashContent.swift in Sources */,
 				66AB985A258C8E07000ACE57 /* MainWindowController.swift in Sources */,
 				66AB9889258CBD9C000ACE57 /* MainSplitViewController.swift in Sources */,
 				66AB986C258C97A0000ACE57 /* Tools.swift in Sources */,

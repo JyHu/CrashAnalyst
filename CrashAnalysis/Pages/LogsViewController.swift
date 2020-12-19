@@ -43,6 +43,8 @@ private extension LogsViewController {
         
         storage.append(Date.logDate.colored(.secondaryLabelColor))
         
+        storage.append(" ")
+        
         if let log = notification.object as? String {
             storage.append(log.colored(.textColor))
         } else if let log = notification.object as? NSAttributedString {

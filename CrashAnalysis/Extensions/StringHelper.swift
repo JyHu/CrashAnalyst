@@ -8,6 +8,65 @@
 
 import Cocoa
 
+/// 定义一个操作符
+infix operator ++: LogicalDisjunctionPrecedence
+
+extension NSAttributedString {
+    
+    /// 添加换行
+    class var lineFeed: Self {
+        return self.init(string: "\n")
+    }
+    
+    /// 获取一个空的富文本字符串
+    class var empty: NSAttributedString {
+        return self.init(string: "")
+    }
+}
+
+extension NSMutableAttributedString {
+    
+    /// 拼接一个字符串
+    /// - Parameters:
+    ///   - string: 要拼接的字符串
+    ///   - attributes: 富文本属性
+    func append(_ string: String?, attributes: [NSAttributedString.Key: Any] = [:]) {
+        guard let string = string else {
+            return
+        }
+        
+        if attributes.count == 0 {
+            append(string.colored())
+        } else {
+            append(string.attributed(with: attributes))
+        }
+    }
+    
+    /// 拼接一个换行符
+    func appendLineFeed() {
+        append(NSAttributedString.lineFeed)
+    }
+    
+    /// 定义两个富文本拼接的操作符
+    /// - Parameters:
+    ///   - left: 左边原始字符串
+    ///   - right: 右边随意的字符串，可以是string，或者attributedString
+    /// - Returns: 拼接后的字符串
+    static func ++(left: NSMutableAttributedString, right: Any) -> NSMutableAttributedString {
+        if right is String {
+            left.append(right as? String)
+        } else if right is NSAttributedString {
+            left.append(right as! NSAttributedString)
+        } else {
+            left.append("\(right)")
+        }
+        
+        return left
+    }
+}
+
+
+
 extension String {
     
     /// 获取字符串中对应位置的字符
@@ -55,11 +114,42 @@ extension String {
     /// 将普通字符串转换成富文本
     /// - Parameter color: 富文本的颜色
     /// - Returns: 转换后的富文本
-    func colored(_ color: NSColor? = nil) -> NSAttributedString {
+    func colored(_ color: NSColor? = nil) -> NSMutableAttributedString {
         guard let color = color else {
-            return NSAttributedString(string: self)
+            return NSMutableAttributedString(string: self)
         }
         
-        return NSAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color])
+        return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color])
+    }
+    
+    /// 添加自定义的富文本属性
+    /// - Parameter attributes: 富文本属性列表
+    /// - Returns: 处理后的富文本
+    func attributed(with attributes: [NSAttributedString.Key: Any] = [:]) -> NSMutableAttributedString {
+        if attributes.count == 0 {
+            return NSMutableAttributedString(string: self)
+        }
+        
+        return NSMutableAttributedString(string: self, attributes: attributes)
+    }
+    
+    /// 字符串高亮，默认为红色
+    var highlighted: NSMutableAttributedString {
+        return colored(.red)
+    }
+    
+    /// 添加次要的颜色
+    var lowlighted: NSMutableAttributedString {
+        return colored(.secondaryLabelColor)
+    }
+    
+    /// 获取当前字符串的最后路径
+    var lastPathComponent: String? {
+        guard let range = self.range(of: "/", options: .backwards) else {
+            return nil
+        }
+        
+        
+        return String(self[self.index(after: range.lowerBound)..<self.index(self.startIndex, offsetBy: self.count)])
     }
 }
