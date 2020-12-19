@@ -28,6 +28,7 @@
 		66AB988C258CBDFD000ACE57 /* AnalysisSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */; };
 		66AB9890258CC235000ACE57 /* IntHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB988F258CC235000ACE57 /* IntHelper.swift */; };
 		66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9898258DA98F000ACE57 /* FileTips.swift */; };
+		66AB98A8258DB95F000ACE57 /* MatrixAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisSplitViewController.swift; sourceTree = "<group>"; };
 		66AB988F258CC235000ACE57 /* IntHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntHelper.swift; sourceTree = "<group>"; };
 		66AB9898258DA98F000ACE57 /* FileTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTips.swift; sourceTree = "<group>"; };
+		66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixAnalysisViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				66AB9847258C8CC3000ACE57 /* HistoriesViewController.swift */,
 				66AB984D258C8D48000ACE57 /* FileAnalysisViewController.swift */,
 				66AB9850258C8D58000ACE57 /* AddressAnalysisViewController.swift */,
+				66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */,
 				66AB9853258C8D67000ACE57 /* LogsViewController.swift */,
 				66AB9856258C8DBB000ACE57 /* AnalysisTabViewController.swift */,
 				66AB9888258CBD9C000ACE57 /* MainSplitViewController.swift */,
@@ -216,6 +219,7 @@
 				66AB9869258C978C000ACE57 /* StringHelper.swift in Sources */,
 				66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */,
 				66AB9851258C8D58000ACE57 /* AddressAnalysisViewController.swift in Sources */,
+				66AB98A8258DB95F000ACE57 /* MatrixAnalysisViewController.swift in Sources */,
 				66AB9865258C9755000ACE57 /* dSYMManager.swift in Sources */,
 				66AB985A258C8E07000ACE57 /* MainWindowController.swift in Sources */,
 				66AB9889258CBD9C000ACE57 /* MainSplitViewController.swift in Sources */,

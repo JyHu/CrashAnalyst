@@ -47,10 +47,6 @@ class FileAnalysisViewController: NSViewController {
         textView.textStorage?.setAttributedString(attributedString)
     }
     
-    @IBAction func openAddressAnalysisAction(_ sender: NSButton) {
-        NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.address)
-    }
-    
     @IBAction func openDSymPathAction(_ sender: Any) {
         NSWorkspace.shared.open(URL(fileURLWithPath: pathButton.title))
     }

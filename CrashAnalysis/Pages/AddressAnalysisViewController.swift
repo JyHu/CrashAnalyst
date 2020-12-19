@@ -27,10 +27,6 @@ class AddressAnalysisViewController: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAction), name: .dsymUpdated, object: nil)
     }
     
-    @IBAction func openFileAnalysisAction(_ sender: Any) {
-        NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.file)
-    }
-    
     @IBAction func chooiceDSymAction(_ sender: Any) {
         let openPanel = NSOpenPanel()
         openPanel.title = "Chooice dSym files or  directory"
