@@ -14,10 +14,15 @@ enum AnalysisType {
     case matrix     /// tencent matrix
 }
 
+enum MainTab {
+    case dSYM
+    case doc
+}
+
 /// 内部通知
 extension NSNotification.Name {
     
-    /// 切换崩溃分析类型
+    /// 切换崩溃分析类型，object为AnalysisType类型
     static let switchAnalysis = NSNotification.Name("com.auu.swichAnalysis.notification")
     
     /// 增加日志
@@ -25,6 +30,9 @@ extension NSNotification.Name {
     
     /// dSYM 文件更新
     static let dsymUpdated = NSNotification.Name("com.auu.dsymUpdated.notification")
+    
+    /// 切换右侧显示页面，object为MainTab类型
+    static let switchMainTab = NSNotification.Name("com.auu.switchMainTab.notification")
 }
 
 let CFBundleShortVersionString = "CFBundleShortVersionString"

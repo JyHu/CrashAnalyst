@@ -9,10 +9,22 @@ import Cocoa
 
 class MainWindowController: NSWindowController {
 
+    @IBOutlet weak var segmentedControl: NSSegmentedControl!
+    
     override func windowDidLoad() {
         super.windowDidLoad()
     
         dSYMManager.shared.reload()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(switchMainTabAction(_:)), name: .switchMainTab, object: nil)
+    }
+    
+    @objc private func switchMainTabAction(_ notification: NSNotification) {
+        guard let object = notification.object as? MainTab else {
+            return
+        }
+        
+        segmentedControl.isHidden = object == .doc
     }
 
     @IBAction func analysisTypeAction(_ sender: NSSegmentedControl) {

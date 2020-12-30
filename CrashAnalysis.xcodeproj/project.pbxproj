@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6682C554259C913D00470168 /* HashHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C553259C913D00470168 /* HashHelper.swift */; };
+		6682C559259CAA1A00470168 /* NavigateTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C558259CAA1A00470168 /* NavigateTabViewController.swift */; };
+		6682C55C259CAB0D00470168 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C55B259CAB0D00470168 /* MainTabViewController.swift */; };
+		6682C55F259CADA000470168 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C55E259CADA000470168 /* DocumentViewController.swift */; };
+		6682C562259CADB900470168 /* DocListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C561259CADB900470168 /* DocListViewController.swift */; };
 		66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9831258C866B000ACE57 /* AppDelegate.swift */; };
 		66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9835258C866E000ACE57 /* Assets.xcassets */; };
 		66AB9839258C866E000ACE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9837258C866E000ACE57 /* Main.storyboard */; };
 		66AB9844258C8CB2000ACE57 /* dSYMListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9843258C8CB2000ACE57 /* dSYMListViewController.swift */; };
-		66AB9848258C8CC3000ACE57 /* HistoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9847258C8CC3000ACE57 /* HistoriesViewController.swift */; };
 		66AB984E258C8D48000ACE57 /* FileAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB984D258C8D48000ACE57 /* FileAnalysisViewController.swift */; };
 		66AB9851258C8D58000ACE57 /* AddressAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9850258C8D58000ACE57 /* AddressAnalysisViewController.swift */; };
 		66AB9854258C8D67000ACE57 /* LogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9853258C8D67000ACE57 /* LogsViewController.swift */; };
@@ -35,6 +38,10 @@
 
 /* Begin PBXFileReference section */
 		6682C553259C913D00470168 /* HashHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashHelper.swift; sourceTree = "<group>"; };
+		6682C558259CAA1A00470168 /* NavigateTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTabViewController.swift; sourceTree = "<group>"; };
+		6682C55B259CAB0D00470168 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		6682C55E259CADA000470168 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		6682C561259CADB900470168 /* DocListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocListViewController.swift; sourceTree = "<group>"; };
 		66AB982E258C866B000ACE57 /* CrashAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AB9831258C866B000ACE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66AB9835258C866E000ACE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,7 +49,6 @@
 		66AB983A258C866E000ACE57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66AB983B258C866E000ACE57 /* CrashAnalysis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrashAnalysis.entitlements; sourceTree = "<group>"; };
 		66AB9843258C8CB2000ACE57 /* dSYMListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dSYMListViewController.swift; sourceTree = "<group>"; };
-		66AB9847258C8CC3000ACE57 /* HistoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoriesViewController.swift; sourceTree = "<group>"; };
 		66AB984D258C8D48000ACE57 /* FileAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAnalysisViewController.swift; sourceTree = "<group>"; };
 		66AB9850258C8D58000ACE57 /* AddressAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAnalysisViewController.swift; sourceTree = "<group>"; };
 		66AB9853258C8D67000ACE57 /* LogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				66AB9843258C8CB2000ACE57 /* dSYMListViewController.swift */,
-				66AB9847258C8CC3000ACE57 /* HistoriesViewController.swift */,
+				6682C55E259CADA000470168 /* DocumentViewController.swift */,
+				6682C561259CADB900470168 /* DocListViewController.swift */,
 				66AB984D258C8D48000ACE57 /* FileAnalysisViewController.swift */,
 				66AB9850258C8D58000ACE57 /* AddressAnalysisViewController.swift */,
 				66AB98A7258DB95F000ACE57 /* MatrixAnalysisViewController.swift */,
@@ -119,6 +126,8 @@
 				66AB9856258C8DBB000ACE57 /* AnalysisTabViewController.swift */,
 				66AB9888258CBD9C000ACE57 /* MainSplitViewController.swift */,
 				66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */,
+				6682C558259CAA1A00470168 /* NavigateTabViewController.swift */,
+				6682C55B259CAB0D00470168 /* MainTabViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -216,15 +225,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6682C559259CAA1A00470168 /* NavigateTabViewController.swift in Sources */,
 				66AB988C258CBDFD000ACE57 /* AnalysisSplitViewController.swift in Sources */,
 				66AB9866258C9755000ACE57 /* dSYMModel.swift in Sources */,
 				66AB9857258C8DBB000ACE57 /* AnalysisTabViewController.swift in Sources */,
 				66AB9844258C8CB2000ACE57 /* dSYMListViewController.swift in Sources */,
-				66AB9848258C8CC3000ACE57 /* HistoriesViewController.swift in Sources */,
 				66AB9890258CC235000ACE57 /* IntHelper.swift in Sources */,
 				66AB9869258C978C000ACE57 /* StringHelper.swift in Sources */,
 				66AB9899258DA98F000ACE57 /* FileTips.swift in Sources */,
 				66AB9851258C8D58000ACE57 /* AddressAnalysisViewController.swift in Sources */,
+				6682C55F259CADA000470168 /* DocumentViewController.swift in Sources */,
 				66AB98A8258DB95F000ACE57 /* MatrixAnalysisViewController.swift in Sources */,
 				66AB9865258C9755000ACE57 /* dSYMManager.swift in Sources */,
 				66AB98AB258DCD88000ACE57 /* CrashContent.swift in Sources */,
@@ -232,10 +242,12 @@
 				66AB9889258CBD9C000ACE57 /* MainSplitViewController.swift in Sources */,
 				66AB986C258C97A0000ACE57 /* Tools.swift in Sources */,
 				6682C554259C913D00470168 /* HashHelper.swift in Sources */,
+				6682C55C259CAB0D00470168 /* MainTabViewController.swift in Sources */,
 				66AB986F258C97B1000ACE57 /* RegularExpressionHelper.swift in Sources */,
 				66AB984E258C8D48000ACE57 /* FileAnalysisViewController.swift in Sources */,
 				66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */,
 				66AB985E258C900A000ACE57 /* Definitions.swift in Sources */,
+				6682C562259CADB900470168 /* DocListViewController.swift in Sources */,
 				66AB9861258C92EA000ACE57 /* DateHelper.swift in Sources */,
 				66AB9854258C8D67000ACE57 /* LogsViewController.swift in Sources */,
 			);
