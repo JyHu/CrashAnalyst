@@ -12,11 +12,16 @@ class CrashContent {
     /// 显示标题，只能是 string 或者 attributedString
     fileprivate(set) var title: Any = ""
     /// 显示的崩溃内容
-    fileprivate(set) var content: String = ""
+    fileprivate(set) var content: Any!
     /// 对应的原始数据
     fileprivate(set) var original: Any?
     /// 子列表
     fileprivate(set) var children: [CrashContent] = []
+    
+    fileprivate var symbolAddr: String?
+    fileprivate var instructionAddr: String?
+    
+    private var _jsonString: String?
 
     /// 根据给定的参数初始化当前对象
     /// - Parameters:
@@ -44,6 +49,40 @@ class CrashContent {
             original = "\(json)"
         }
     }
+    
+    /// 获取显示的原始内容字符串
+    /// - Returns: 转换后的字符串
+    func jsonString() -> String? {
+        if _jsonString != nil {
+            return _jsonString
+        }
+        guard let json = original else {
+            return nil
+        }
+
+        _jsonString = hashToString(of: json)
+        return _jsonString
+    }
+    
+    /// 根据找到的dSYM解析崩溃的内存信息
+    func analysis(with dSYM: dSYMModel?) {
+        guard let dSYM = dSYM else {
+            return
+        }
+        
+        if let symbolAddr = symbolAddr,
+           let instructionAddr = instructionAddr {
+            if let content = dSYM.analysis(slideAddress: symbolAddr, crashAddress: instructionAddr) {
+                self.content = "\(instructionAddr) \(symbolAddr) \(content)".colored(.red)
+            }
+        }
+        
+        if children.count > 0 {
+            for child in children {
+                child.analysis(with: dSYM)
+            }
+        }
+    }
 }
 
 /// 崩溃信息类，包含当前崩溃信息的基本信息和大包信息
@@ -53,11 +92,11 @@ class CrashAna {
     var version: String!
     var build: String!
 
-    init(_ json: [String: Any], title: String, content: String) {
-        let crash = CrashContent(title, content: content)
+    init(_ json: [String: Any]) {
+        let crash = CrashContent("Analysis", content: "")
         crash.children = analysis(json: json)
         crash.original = json
-        self.content = CrashContent("Analysis", content: "", children: [crash])
+        self.content = crash
     }
 }
 
@@ -67,10 +106,6 @@ private extension CrashAna {
 
         if let lagType = json["lagType"] as? String {
             items.append(CrashContent("Lag Type", content: lagType))
-        }
-
-        if let user = json["user"] as? [String: Any] {
-            items.append(CrashContent("User", json: user))
         }
 
         if let system = analysis(system: json["system"]) {
@@ -160,7 +195,7 @@ private extension CrashAna {
         /// "CFBundleVersion": "6B4D4C"
         if let version = system["CFBundleShortVersionString"] as? String,
             let build = system["CFBundleVersion"] as? String {
-            items.append(CrashContent("Version", content: "\(version) (\(build)) (\(build.count > 6 ? "AppStore" : "官网"))"))
+            items.append(CrashContent("Version", content: "\(version) (\(build))"))
             self.version = version
             self.build = build
         }
@@ -252,7 +287,7 @@ private extension CrashAna {
 
         var items = [CrashContent]()
 
-        for image in binary_images {
+        for (index, image) in binary_images.enumerated() {
             guard
                 let major = image["major_version"],
                 let uuid = image["uuid"] as? String,
@@ -266,7 +301,7 @@ private extension CrashAna {
                 continue
             }
 
-            let iname = "\(frameName) (\(minor) - \(major))"
+            let iname = "\(index)  \(frameName) (\(minor) - \(major))"
             items.append(CrashContent(iname, content: "\(name) <\(uuid)>", original: image))
         }
 
@@ -363,8 +398,8 @@ private extension CrashAna {
 
         if let backtrace = thread["backtrace"] as? [String: Any] {
             if let contents = backtrace["contents"] as? [[String: Any]] {
-                for content in contents {
-                    if let bc = analysis(backtrace: content) {
+                for (index, content) in contents.enumerated() {
+                    if let bc = analysis(index: index, backtrace: content) {
                         item.children.append(bc)
                     }
                 }
@@ -378,7 +413,7 @@ private extension CrashAna {
         return item
     }
 
-    func analysis(backtrace: [String: Any]) -> CrashContent? {
+    func analysis(index: Int, backtrace: [String: Any]) -> CrashContent? {
         /// {
         ///     "symbol_name": "__semwait_signal",
         ///     "symbol_addr": 140735014149796,
@@ -388,19 +423,30 @@ private extension CrashAna {
         /// }
 
         guard
-            let object = backtrace["object_name"] as? String,
+            let objectName = backtrace["object_name"] as? String,
             let symbolAddr = backtrace["symbol_addr"] as? uint64,
             let instructionAddr = backtrace["instruction_addr"] as? uint64 else {
             return nil
         }
 
+        /// 将内存地址转成16进制
         let symbolHex = symbolAddr.hexString(prefix: "0x")
+        /// 将内存地址转成16进制
         let instructionHex = instructionAddr.hexString(prefix: "0x")
+        let symbolName = backtrace["symbol_name"] as? String
+        
+        let content = "\(instructionHex) \(symbolHex) \(symbolName ?? "")"
 
-        let content = "\(instructionHex) \(symbolHex) \(backtrace["symbol_name"] ?? "")"
-
+        let crashContent = CrashContent("\(index)  \(objectName)", content: content, original: backtrace)
+        
+        /// 如果symbol name为空，则需要解析内存地址
+        if symbolName == nil {
+            crashContent.symbolAddr = symbolHex
+            crashContent.instructionAddr = instructionHex
+        }
+        
         /// 0x00007FFF60CC6220
         /// 0x00007fff90420ebc
-        return CrashContent(object, content: content, original: backtrace)
+        return crashContent
     }
 }

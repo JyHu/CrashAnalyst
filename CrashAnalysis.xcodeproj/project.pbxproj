@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6682C554259C913D00470168 /* HashHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C553259C913D00470168 /* HashHelper.swift */; };
 		66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9831258C866B000ACE57 /* AppDelegate.swift */; };
 		66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9835258C866E000ACE57 /* Assets.xcassets */; };
 		66AB9839258C866E000ACE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9837258C866E000ACE57 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6682C553259C913D00470168 /* HashHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashHelper.swift; sourceTree = "<group>"; };
 		66AB982E258C866B000ACE57 /* CrashAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AB9831258C866B000ACE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66AB9835258C866E000ACE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				66AB986E258C97B1000ACE57 /* RegularExpressionHelper.swift */,
 				66AB9860258C92EA000ACE57 /* DateHelper.swift */,
 				66AB988F258CC235000ACE57 /* IntHelper.swift */,
+				6682C553259C913D00470168 /* HashHelper.swift */,
 				66AB9868258C978B000ACE57 /* StringHelper.swift */,
 			);
 			path = Extensions;
@@ -228,6 +231,7 @@
 				66AB985A258C8E07000ACE57 /* MainWindowController.swift in Sources */,
 				66AB9889258CBD9C000ACE57 /* MainSplitViewController.swift in Sources */,
 				66AB986C258C97A0000ACE57 /* Tools.swift in Sources */,
+				6682C554259C913D00470168 /* HashHelper.swift in Sources */,
 				66AB986F258C97B1000ACE57 /* RegularExpressionHelper.swift in Sources */,
 				66AB984E258C8D48000ACE57 /* FileAnalysisViewController.swift in Sources */,
 				66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */,

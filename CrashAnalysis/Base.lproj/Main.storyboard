@@ -1100,18 +1100,8 @@
                                 <rect key="frame" x="0.0" y="276" width="501" height="30"/>
                                 <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
                                 <beginningViews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOh-CM-SnD">
-                                        <rect key="frame" x="4" y="-2" width="75" height="32"/>
-                                        <buttonCell key="cell" type="push" title="dSym" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iAT-7N-zsn">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="dsymAction:" target="1I2-Z3-TcP" id="gre-U1-tPm"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQU-Wm-kWh">
-                                        <rect key="frame" x="75" y="-2" width="90" height="32"/>
+                                        <rect key="frame" x="4" y="-2" width="90" height="32"/>
                                         <buttonCell key="cell" type="push" title="Analysis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y9F-ov-DKQ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1121,7 +1111,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3A-Ag-G1t">
-                                        <rect key="frame" x="167" y="8" width="4" height="14"/>
+                                        <rect key="frame" x="96" y="8" width="4" height="14"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="XrI-5T-L3O">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1137,10 +1127,8 @@
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -1155,7 +1143,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="276"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="s1i-LZ-ccj">
+                                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="s1i-LZ-ccj">
                                                     <rect key="frame" x="0.0" y="0.0" width="286" height="276"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1168,6 +1156,7 @@
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="kTz-Sz-nE7"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="sKp-wS-ALu"/>
                                         </constraints>
                                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="DzQ-lZ-Nme">
                                             <rect key="frame" x="-100" y="-100" width="240" height="16"/>
@@ -1257,7 +1246,7 @@
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <size key="minSize" width="214" height="137"/>
-                                                            <size key="maxSize" width="240" height="10000000"/>
+                                                            <size key="maxSize" width="300" height="10000000"/>
                                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                         </textView>
                                                     </subviews>

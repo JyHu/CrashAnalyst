@@ -15,7 +15,7 @@ class AddressAnalysisViewController: NSViewController {
     
     @IBOutlet weak var crashAddressField: NSTextField!
     
-    @IBOutlet var resultTextView: NSTextView!
+    @IBOutlet weak var resultTextView: NSTextView!
     
     var dsym: dSYMModel?
     
