@@ -21,13 +21,17 @@ private extension AnalysisTabViewController {
             return
         }
         
-        if type == .address {
+        if type == .file {
+            if self.tabViewItems.count >= 1 {
+                self.selectedTabViewItemIndex = 0
+            }
+        } else if type == .address {
             if self.tabViewItems.count >= 2 {
                 self.selectedTabViewItemIndex = 1
             }
-        } else {
-            if self.tabViewItems.count >= 1 {
-                self.selectedTabViewItemIndex = 0
+        } else if type == .matrix {
+            if self.tabViewItems.count >= 3 {
+                self.selectedTabViewItemIndex = 2
             }
         }
     }

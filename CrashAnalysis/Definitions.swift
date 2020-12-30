@@ -11,6 +11,7 @@ import Foundation
 enum AnalysisType {
     case file       /// 分析崩溃文件
     case address    /// 分析崩溃日志地址
+    case matrix     /// tencent matrix
 }
 
 /// 内部通知

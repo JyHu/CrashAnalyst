@@ -8,19 +8,12 @@
 
 import Foundation
 
-enum OutputType {
-    case `default`
-    case json
-    case data
-}
-
 /// 执行shell脚本
 /// - Parameters:
 ///   - sc: shell脚本
-///   - type: 返回数据的类型
 /// - Returns: 执行结果
-func execute(_ sc: String, type: OutputType = .default) -> Any? {
-    xlog(sc)
+func execute(_ sc: String) -> Any? {
+    xlog(sc.colored(.linkColor))
     
     let task = Process()
     task.launchPath = "/bin/bash"
@@ -33,17 +26,11 @@ func execute(_ sc: String, type: OutputType = .default) -> Any? {
     task.waitUntilExit()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    
-    if type == .data {
-        return data
-    }
-    
-    if type == .json {
-        return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-    }
-    
+
     if let result = String(data: data, encoding: .utf8) {
-        return result.trimming
+        let output = result.trimming
+        xlog(output.colored(.orange))
+        return output
     }
     
     return nil

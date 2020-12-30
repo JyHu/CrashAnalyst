@@ -15,7 +15,7 @@ class AddressAnalysisViewController: NSViewController {
     
     @IBOutlet weak var crashAddressField: NSTextField!
     
-    @IBOutlet var resultTextView: NSTextView!
+    @IBOutlet weak var resultTextView: NSTextView!
     
     var dsym: dSYMModel?
     
@@ -25,10 +25,6 @@ class AddressAnalysisViewController: NSViewController {
         reloadAction()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAction), name: .dsymUpdated, object: nil)
-    }
-    
-    @IBAction func openFileAnalysisAction(_ sender: Any) {
-        NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.file)
     }
     
     @IBAction func chooiceDSymAction(_ sender: Any) {
