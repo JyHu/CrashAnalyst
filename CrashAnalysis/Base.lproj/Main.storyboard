@@ -684,7 +684,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="-551"/>
+            <point key="canvasLocation" x="678" y="-1081"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -694,7 +694,7 @@
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1417"/>
                         <toolbar key="toolbar" implicitIdentifier="B0AF0386-CB2D-426E-8E13-1D6FB5770A90" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="tex-Hg-o0q">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="VQ4-an-Ncw"/>
@@ -737,7 +737,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="-258"/>
+            <point key="canvasLocation" x="671" y="-783"/>
         </scene>
         <!--Main Split View Controller-->
         <scene sceneID="OgM-iR-QSs">
@@ -762,7 +762,7 @@
                 </splitViewController>
                 <customObject id="Kmn-SO-vWk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="297"/>
+            <point key="canvasLocation" x="671" y="-316"/>
         </scene>
         <!--Main Tab View Controller-->
         <scene sceneID="HtA-rd-rwq">
@@ -788,7 +788,7 @@
                 </tabViewController>
                 <customObject id="lLq-7c-mat" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499" y="777"/>
+            <point key="canvasLocation" x="670" y="209"/>
         </scene>
         <!--Document View Controller-->
         <scene sceneID="6bE-jy-nTs">
@@ -797,11 +797,148 @@
                     <view key="view" id="Wk4-eY-6Io">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView orientation="horizontal" alignment="centerY" spacing="30" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-uA-fT3">
+                                <rect key="frame" x="0.0" y="265" width="450" height="35"/>
+                                <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                <beginningViews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tA9-7f-XQ8">
+                                        <rect key="frame" x="10" y="11" width="14" height="14"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSInvalidDataFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Yfr-4l-J5e">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="backLocalAction:" target="PcD-R2-YSe" id="Q6h-rW-Ixp"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wi8-PA-Wy4">
+                                        <rect key="frame" x="54" y="11" width="14" height="14"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSHomeTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="oaE-7V-cRj">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="goHomeAction:" target="PcD-R2-YSe" id="F6H-gj-M26"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4qD-xu-V7p">
+                                        <rect key="frame" x="98" y="11" width="9" height="14"/>
+                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSGoBackTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="PLT-ui-snL">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="goBackAction:" target="PcD-R2-YSe" id="oLX-oA-iIt"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DPE-Ua-E9T">
+                                        <rect key="frame" x="137" y="12" width="9" height="12"/>
+                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSGoForwardTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Bx1-MC-Vxh">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="goForwardAction:" target="PcD-R2-YSe" id="fOH-8R-wbv"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gc-mA-QPw">
+                                        <rect key="frame" x="176" y="12" width="11" height="11"/>
+                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSStopProgressTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="9gU-Ie-wqI">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="stopLoadingAction:" target="PcD-R2-YSe" id="AlU-fB-avs"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T94-D5-obs">
+                                        <rect key="frame" x="217" y="10" width="11" height="15"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="pWe-lu-E52">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="refreshAction:" target="PcD-R2-YSe" id="bN3-VV-jbS"/>
+                                        </connections>
+                                    </button>
+                                </beginningViews>
+                                <endViews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ys-Az-1Ec">
+                                        <rect key="frame" x="316" y="10" width="49" height="16"/>
+                                        <buttonCell key="cell" type="bevel" title="doc file" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xiz-3P-Onf">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openFileAction:" target="PcD-R2-YSe" id="nrc-z0-A14"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-0O-nSJ">
+                                        <rect key="frame" x="393" y="9" width="49" height="18"/>
+                                        <buttonCell key="cell" type="check" title="原版" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sp3-OM-PTC">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="showOriginAction:" target="PcD-R2-YSe" id="XfJ-eX-f4a"/>
+                                        </connections>
+                                    </button>
+                                </endViews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="mDf-E2-Egx"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-xM-rms">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="265"/>
+                                <font key="font" metaFont="system"/>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="CMf-xM-rms" firstAttribute="leading" secondItem="Wk4-eY-6Io" secondAttribute="leading" id="2cv-ls-Faj"/>
+                            <constraint firstAttribute="trailing" secondItem="3HV-uA-fT3" secondAttribute="trailing" id="52M-Ri-Hz4"/>
+                            <constraint firstItem="3HV-uA-fT3" firstAttribute="top" secondItem="Wk4-eY-6Io" secondAttribute="top" id="Axe-GX-z6Q"/>
+                            <constraint firstItem="CMf-xM-rms" firstAttribute="top" secondItem="3HV-uA-fT3" secondAttribute="bottom" id="KmB-3y-Fzj"/>
+                            <constraint firstAttribute="bottom" secondItem="CMf-xM-rms" secondAttribute="bottom" id="Oln-gZ-cqO"/>
+                            <constraint firstAttribute="trailing" secondItem="CMf-xM-rms" secondAttribute="trailing" id="YRz-6b-14N"/>
+                            <constraint firstItem="3HV-uA-fT3" firstAttribute="leading" secondItem="Wk4-eY-6Io" secondAttribute="leading" id="fzF-hG-e0z"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backLocalButton" destination="tA9-7f-XQ8" id="uaw-oW-7qC"/>
+                        <outlet property="fileButton" destination="3Ys-Az-1Ec" id="sGR-nN-hg2"/>
+                        <outlet property="goBackButton" destination="4qD-xu-V7p" id="g4K-yS-Dja"/>
+                        <outlet property="goForwardButton" destination="DPE-Ua-E9T" id="Bsb-kh-ZlK"/>
+                        <outlet property="goHomeButton" destination="wi8-PA-Wy4" id="9sB-x2-fcb"/>
+                        <outlet property="refreshButton" destination="T94-D5-obs" id="AV0-9v-rMN"/>
+                        <outlet property="showOriginButton" destination="Xqc-0O-nSJ" id="YGg-1Z-0Rh"/>
+                        <outlet property="stopLoadingButton" destination="6gc-mA-QPw" id="Ig2-HA-MD2"/>
+                        <outlet property="webTab" destination="CMf-xM-rms" id="IEb-Zk-fhg"/>
+                    </connections>
                 </viewController>
                 <customObject id="WLn-m4-0iK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="867" y="1179"/>
+            <point key="canvasLocation" x="1243" y="723"/>
         </scene>
         <!--Analysis Split View Controller-->
         <scene sceneID="OPl-Aa-Qea">
@@ -826,7 +963,7 @@
                 </splitViewController>
                 <customObject id="q9n-Ok-dGC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="368" y="1432"/>
+            <point key="canvasLocation" x="670" y="723"/>
         </scene>
         <!--File Analysis View Controller-->
         <scene sceneID="P96-xW-ZJh">
@@ -931,7 +1068,7 @@
                 </viewController>
                 <customObject id="2T5-2W-HLM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="598" y="2171"/>
+            <point key="canvasLocation" x="190" y="1854"/>
         </scene>
         <!--Analysis Tab View Controller-->
         <scene sceneID="u6C-at-3sP">
@@ -959,7 +1096,7 @@
                 </tabViewController>
                 <customObject id="aJU-hR-uWt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079" y="1601"/>
+            <point key="canvasLocation" x="671" y="1284"/>
         </scene>
         <!--Address Analysis View Controller-->
         <scene sceneID="Xxf-XI-GYX">
@@ -1126,7 +1263,7 @@
                 </viewController>
                 <customObject id="ope-rJ-evd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079" y="2171"/>
+            <point key="canvasLocation" x="671" y="1854"/>
         </scene>
         <!--Matrix Analysis View Controller-->
         <scene sceneID="fTx-dF-mLu">
@@ -1339,7 +1476,7 @@
                 </viewController>
                 <customObject id="ZdD-nV-ZcP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559" y="2171"/>
+            <point key="canvasLocation" x="1151" y="1854"/>
         </scene>
         <!--Logs View Controller-->
         <scene sceneID="5WP-AG-GnZ">
@@ -1389,7 +1526,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="121" y="2171"/>
+            <point key="canvasLocation" x="150" y="1287"/>
         </scene>
         <!--Navigate Tab View Controller-->
         <scene sceneID="dfF-O4-44f">
@@ -1415,7 +1552,7 @@
                 </tabViewController>
                 <customObject id="KKj-md-EXn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658" y="1601"/>
+            <point key="canvasLocation" x="154" y="209"/>
         </scene>
         <!--dSYMs-->
         <scene sceneID="365-Xq-8OG">
@@ -1509,7 +1646,7 @@
                 </viewController>
                 <customObject id="ijO-8t-j56" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-895" y="2171"/>
+            <point key="canvasLocation" x="-364" y="726"/>
         </scene>
         <!--Doc List-->
         <scene sceneID="ZbV-Yo-IwW">
@@ -1522,11 +1659,17 @@
                 </viewController>
                 <customObject id="sAD-9F-gGB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="2171"/>
+            <point key="canvasLocation" x="154" y="726"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSGoBackTemplate" width="9" height="12"/>
+        <image name="NSGoForwardTemplate" width="9" height="12"/>
+        <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSInvalidDataFreestandingTemplate" width="14" height="14"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="buttonCell:Xj6-hI-Pwd:image" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T

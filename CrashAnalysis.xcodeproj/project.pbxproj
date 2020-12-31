@@ -12,6 +12,8 @@
 		6682C55C259CAB0D00470168 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C55B259CAB0D00470168 /* MainTabViewController.swift */; };
 		6682C55F259CADA000470168 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C55E259CADA000470168 /* DocumentViewController.swift */; };
 		6682C562259CADB900470168 /* DocListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C561259CADB900470168 /* DocListViewController.swift */; };
+		6682C577259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html in Resources */ = {isa = PBXBuildFile; fileRef = 6682C576259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html */; };
+		6682C5C7259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5C6259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html */; };
 		66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9831258C866B000ACE57 /* AppDelegate.swift */; };
 		66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9835258C866E000ACE57 /* Assets.xcassets */; };
 		66AB9839258C866E000ACE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9837258C866E000ACE57 /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 		6682C55B259CAB0D00470168 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		6682C55E259CADA000470168 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		6682C561259CADB900470168 /* DocListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocListViewController.swift; sourceTree = "<group>"; };
+		6682C576259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = diagnosing_issues_using_crash_reports_and_device_logs.html; sourceTree = "<group>"; };
+		6682C5C6259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = diagnosing_issues_using_crash_reports_and_device_logs_en.html; sourceTree = "<group>"; };
 		66AB982E258C866B000ACE57 /* CrashAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AB9831258C866B000ACE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66AB9835258C866E000ACE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				66AB988B258CBDFD000ACE57 /* AnalysisSplitViewController.swift */,
 				6682C558259CAA1A00470168 /* NavigateTabViewController.swift */,
 				6682C55B259CAB0D00470168 /* MainTabViewController.swift */,
+				6682C5C6259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html */,
+				6682C576259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -172,6 +178,8 @@
 			dependencies = (
 			);
 			name = CrashAnalysis;
+			packageProductDependencies = (
+			);
 			productName = CrashAnalysis;
 			productReference = 66AB982E258C866B000ACE57 /* CrashAnalysis.app */;
 			productType = "com.apple.product-type.application";
@@ -199,6 +207,8 @@
 				Base,
 			);
 			mainGroup = 66AB9825258C866B000ACE57;
+			packageReferences = (
+			);
 			productRefGroup = 66AB982F258C866B000ACE57 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -213,6 +223,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6682C5C7259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html in Resources */,
+				6682C577259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html in Resources */,
 				66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */,
 				66AB9839258C866E000ACE57 /* Main.storyboard in Resources */,
 			);
