@@ -21,11 +21,8 @@ private extension NSUserInterfaceItemIdentifier {
 
 class DocumentViewController: NSViewController {
 
-    @IBOutlet weak var goBackButton: NSButton!
-    @IBOutlet weak var goForwardButton: NSButton!
     @IBOutlet weak var stopLoadingButton: NSButton!
     @IBOutlet weak var refreshButton: NSButton!
-    @IBOutlet weak var goHomeButton: NSButton!
     
     /// 返回本地资源web tab的按钮
     @IBOutlet weak var backLocalButton: NSButton!
@@ -35,6 +32,8 @@ class DocumentViewController: NSViewController {
     @IBOutlet weak var fileButton: NSButton!
     /// 承载webview的tab
     @IBOutlet weak var webTab: NSTabView!
+    /// 网页加载进度
+    @IBOutlet weak var progressBar: NSProgressIndicator!
     
     /// 本地资源tab
     private var localTab = NSTabView()
@@ -51,9 +50,6 @@ class DocumentViewController: NSViewController {
         
         showOriginButton.state = .off
         stopLoadingButton.isHidden = true
-        goBackButton.isEnabled = false
-        goForwardButton.isEnabled = false
-        fileButton.isEnabled = false
         
         localTab.tabViewType = .noTabsNoBorder
         
@@ -68,29 +64,12 @@ class DocumentViewController: NSViewController {
         loadHTMLFile(with: "diagnosing_issues_using_crash_reports_and_device_logs.html", webView: chineseWebView)
     }
     
-    @IBAction func goBackAction(_ sender: NSButton) {
-        activeWebView.goBack()
-    }
-    
-    @IBAction func goForwardAction(_ sender: Any) {
-        activeWebView.goForward()
-    }
-    
     @IBAction func stopLoadingAction(_ sender: NSButton) {
         activeWebView.stopLoading()
     }
     
     @IBAction func refreshAction(_ sender: NSButton) {
         activeWebView.reload()
-    }
-    
-    @IBAction func goHomeAction(_ sender: NSButton) {
-        guard let homeItem = activeWebView.backForwardList.backList.first else {
-            return
-        }
-        
-        activeWebView.go(to: homeItem)
-        updateNavigationState()
     }
     
     @IBAction func backLocalAction(_ sender: NSButton) {
@@ -107,6 +86,28 @@ class DocumentViewController: NSViewController {
     }
     
     @IBAction func openFileAction(_ sender: NSButton) {
+        guard let url = activeWebView.url else {
+            return
+        }
+        
+        if url.scheme?.hasPrefix("http") ?? false {        
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath != "estimatedProgress" {
+            return
+        }
+        
+        guard let change = change,
+              let progress = change[.newKey] as? Double else {
+            return
+        }
+        
+        update(progress: progress)
     }
 }
 
@@ -151,6 +152,7 @@ extension DocumentViewController: WKUIDelegate, WKNavigationDelegate {
         if webView != remoteWebView && (navigationAction.request.url?.scheme?.hasPrefix("http") ?? false) {
             webTab.selectedItem(with: .remoteWebID)
             remoteWebView.load(navigationAction.request)
+            
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
@@ -232,6 +234,8 @@ private extension DocumentViewController {
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = true
         
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: [ .new ], context: nil)
+        
         return webView
     }
     
@@ -241,23 +245,26 @@ private extension DocumentViewController {
         if isRemoteItem {
             refreshButton.isHidden = remoteWebView.isLoading
             stopLoadingButton.isHidden = !remoteWebView.isLoading
-            goBackButton.isHidden = false
-            goForwardButton.isHidden = false
-            goHomeButton.isHidden = false
-            
-            goBackButton.isEnabled = remoteWebView.canGoBack
-            goForwardButton.isEnabled = remoteWebView.canGoForward
-            goHomeButton.isEnabled = remoteWebView.backForwardList.backList.count > 0
         } else {
             refreshButton.isHidden = true
             stopLoadingButton.isHidden = true
-            goBackButton.isHidden = true
-            goForwardButton.isHidden = true
-            goHomeButton.isHidden = true
         }
         
         backLocalButton.isHidden = !isRemoteItem
         showOriginButton.isHidden = isRemoteItem
+        
+        update(progress: activeWebView.estimatedProgress)
+        
+        guard let urlString = activeWebView.url?.absoluteString else {
+            fileButton.title = ""
+            return
+        }
+        
+        if urlString.hasPrefix("http") {
+            fileButton.title = urlString + " ⤴︎"
+        } else {
+            fileButton.title = ""
+        }
     }
     
     func createTab(with webView: WKWebView) -> NSTabViewItem {
@@ -274,6 +281,11 @@ private extension DocumentViewController {
         }
         
         webView.loadHTMLString(html, baseURL: nil)
+    }
+    
+    func update(progress: Double) {
+        progressBar.isHidden = progress == 0 || progress == 1
+        progressBar.doubleValue = progress
     }
     
     var isRemoteItem: Bool {

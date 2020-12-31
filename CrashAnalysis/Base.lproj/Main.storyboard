@@ -812,38 +812,8 @@
                                             <action selector="backLocalAction:" target="PcD-R2-YSe" id="Q6h-rW-Ixp"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wi8-PA-Wy4">
-                                        <rect key="frame" x="54" y="11" width="14" height="14"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSHomeTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="oaE-7V-cRj">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="goHomeAction:" target="PcD-R2-YSe" id="F6H-gj-M26"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4qD-xu-V7p">
-                                        <rect key="frame" x="98" y="11" width="9" height="14"/>
-                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSGoBackTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="PLT-ui-snL">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="cellTitle"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="goBackAction:" target="PcD-R2-YSe" id="oLX-oA-iIt"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DPE-Ua-E9T">
-                                        <rect key="frame" x="137" y="12" width="9" height="12"/>
-                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSGoForwardTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Bx1-MC-Vxh">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="cellTitle"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="goForwardAction:" target="PcD-R2-YSe" id="fOH-8R-wbv"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gc-mA-QPw">
-                                        <rect key="frame" x="176" y="12" width="11" height="11"/>
+                                        <rect key="frame" x="54" y="12" width="11" height="11"/>
                                         <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSStopProgressTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="9gU-Ie-wqI">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="cellTitle"/>
@@ -853,7 +823,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T94-D5-obs">
-                                        <rect key="frame" x="217" y="10" width="11" height="15"/>
+                                        <rect key="frame" x="95" y="10" width="11" height="15"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="pWe-lu-E52">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -865,10 +835,10 @@
                                 </beginningViews>
                                 <endViews>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ys-Az-1Ec">
-                                        <rect key="frame" x="316" y="10" width="49" height="16"/>
-                                        <buttonCell key="cell" type="bevel" title="doc file" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xiz-3P-Onf">
+                                        <rect key="frame" x="361" y="11" width="4" height="14"/>
+                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xiz-3P-Onf">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="cellTitle"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="openFileAction:" target="PcD-R2-YSe" id="nrc-z0-A14"/>
@@ -894,14 +864,8 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -913,23 +877,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="265"/>
                                 <font key="font" metaFont="system"/>
                             </tabView>
+                            <progressIndicator wantsLayer="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="PcT-N1-ABP">
+                                <rect key="frame" x="0.0" y="256" width="450" height="12"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstItem="CMf-xM-rms" firstAttribute="leading" secondItem="Wk4-eY-6Io" secondAttribute="leading" id="2cv-ls-Faj"/>
                             <constraint firstAttribute="trailing" secondItem="3HV-uA-fT3" secondAttribute="trailing" id="52M-Ri-Hz4"/>
+                            <constraint firstItem="PcT-N1-ABP" firstAttribute="leading" secondItem="Wk4-eY-6Io" secondAttribute="leading" id="7dX-sT-fOy"/>
+                            <constraint firstItem="PcT-N1-ABP" firstAttribute="top" secondItem="3HV-uA-fT3" secondAttribute="bottom" constant="-3" id="9Ug-s4-a9Q"/>
                             <constraint firstItem="3HV-uA-fT3" firstAttribute="top" secondItem="Wk4-eY-6Io" secondAttribute="top" id="Axe-GX-z6Q"/>
                             <constraint firstItem="CMf-xM-rms" firstAttribute="top" secondItem="3HV-uA-fT3" secondAttribute="bottom" id="KmB-3y-Fzj"/>
                             <constraint firstAttribute="bottom" secondItem="CMf-xM-rms" secondAttribute="bottom" id="Oln-gZ-cqO"/>
                             <constraint firstAttribute="trailing" secondItem="CMf-xM-rms" secondAttribute="trailing" id="YRz-6b-14N"/>
+                            <constraint firstAttribute="trailing" secondItem="PcT-N1-ABP" secondAttribute="trailing" id="auk-eH-YON"/>
                             <constraint firstItem="3HV-uA-fT3" firstAttribute="leading" secondItem="Wk4-eY-6Io" secondAttribute="leading" id="fzF-hG-e0z"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backLocalButton" destination="tA9-7f-XQ8" id="uaw-oW-7qC"/>
                         <outlet property="fileButton" destination="3Ys-Az-1Ec" id="sGR-nN-hg2"/>
-                        <outlet property="goBackButton" destination="4qD-xu-V7p" id="g4K-yS-Dja"/>
-                        <outlet property="goForwardButton" destination="DPE-Ua-E9T" id="Bsb-kh-ZlK"/>
-                        <outlet property="goHomeButton" destination="wi8-PA-Wy4" id="9sB-x2-fcb"/>
+                        <outlet property="progressBar" destination="PcT-N1-ABP" id="zpY-o1-oW8"/>
                         <outlet property="refreshButton" destination="T94-D5-obs" id="AV0-9v-rMN"/>
                         <outlet property="showOriginButton" destination="Xqc-0O-nSJ" id="YGg-1Z-0Rh"/>
                         <outlet property="stopLoadingButton" destination="6gc-mA-QPw" id="Ig2-HA-MD2"/>
@@ -1664,9 +1632,6 @@
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSGoBackTemplate" width="9" height="12"/>
-        <image name="NSGoForwardTemplate" width="9" height="12"/>
-        <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="NSInvalidDataFreestandingTemplate" width="14" height="14"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
