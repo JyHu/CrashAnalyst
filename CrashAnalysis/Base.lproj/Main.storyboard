@@ -848,7 +848,7 @@
                                         <rect key="frame" x="393" y="5" width="49" height="18"/>
                                         <buttonCell key="cell" type="check" title="原版" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sp3-OM-PTC">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="showOriginAction:" target="PcD-R2-YSe" id="XfJ-eX-f4a"/>
@@ -1114,19 +1114,34 @@
                                         </popUpButton>
                                     </gridCell>
                                     <gridCell row="RM3-ew-pLF" column="XiU-4F-2kU" xPlacement="fill" yPlacement="center" id="LKb-QX-ToP">
-                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ISx-ig-AWS">
-                                            <rect key="frame" x="358" y="62" width="60" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Bl0-21-cKo"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSAddTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="IAu-wA-wsx">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="cellTitle"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="chooiceDSymAction:" target="1Hq-5t-cWM" id="3a5-9u-tLf"/>
-                                            </connections>
-                                        </button>
+                                        <box key="contentView" boxType="custom" cornerRadius="2" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="HDb-GZ-bZ7">
+                                            <rect key="frame" x="358" y="63" width="60" height="20"/>
+                                            <view key="contentView" id="D9I-sB-Jaj">
+                                                <rect key="frame" x="1" y="1" width="58" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ISx-ig-AWS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="58" height="18"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="Bl0-21-cKo"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSAddTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="IAu-wA-wsx">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="cellTitle"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="chooiceDSymAction:" target="1Hq-5t-cWM" id="3a5-9u-tLf"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="ISx-ig-AWS" secondAttribute="bottom" id="M8H-e8-qWz"/>
+                                                    <constraint firstItem="ISx-ig-AWS" firstAttribute="leading" secondItem="D9I-sB-Jaj" secondAttribute="leading" id="Tbu-fW-8eE"/>
+                                                    <constraint firstItem="ISx-ig-AWS" firstAttribute="top" secondItem="D9I-sB-Jaj" secondAttribute="top" id="mx7-mb-EcQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ISx-ig-AWS" secondAttribute="trailing" id="umh-Ih-QJD"/>
+                                                </constraints>
+                                            </view>
+                                        </box>
                                     </gridCell>
                                     <gridCell row="Lc8-43-wcN" column="llY-tK-mtz" id="Zyr-1P-BeJ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VnH-RD-mlO">
@@ -1149,19 +1164,34 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Lc8-43-wcN" column="XiU-4F-2kU" headOfMergedCell="wYM-nL-eV4" xPlacement="fill" yPlacement="center" id="wYM-nL-eV4">
-                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ygZ-Uy-fUQ">
-                                            <rect key="frame" x="358" y="0.0" width="60" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="52" id="MqQ-mR-78m"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="roundRect" title="Analysis" bezelStyle="roundedRect" image="buttonCell:Xj6-hI-Pwd:image" imagePosition="overlaps" alignment="center" inset="2" id="Xj6-hI-Pwd">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="cellTitle"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="analysisAction:" target="1Hq-5t-cWM" id="9py-8R-o4a"/>
-                                            </connections>
-                                        </button>
+                                        <box key="contentView" boxType="custom" cornerRadius="2" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="18u-3h-Lke">
+                                            <rect key="frame" x="358" y="1" width="60" height="50"/>
+                                            <view key="contentView" id="Lfn-LW-OXU">
+                                                <rect key="frame" x="1" y="1" width="58" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ygZ-Uy-fUQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="58" height="48"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="MqQ-mR-78m"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="roundRect" title="Analysis" bezelStyle="roundedRect" image="buttonCell:Xj6-hI-Pwd:image" imagePosition="overlaps" alignment="center" inset="2" id="Xj6-hI-Pwd">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="cellTitle"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="analysisAction:" target="1Hq-5t-cWM" id="9py-8R-o4a"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="ygZ-Uy-fUQ" secondAttribute="bottom" id="8wY-hB-r05"/>
+                                                    <constraint firstItem="ygZ-Uy-fUQ" firstAttribute="top" secondItem="Lfn-LW-OXU" secondAttribute="top" id="JAf-XN-fGs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ygZ-Uy-fUQ" secondAttribute="trailing" id="KDU-i1-Tb8"/>
+                                                    <constraint firstItem="ygZ-Uy-fUQ" firstAttribute="leading" secondItem="Lfn-LW-OXU" secondAttribute="leading" id="PzV-ZU-QSv"/>
+                                                </constraints>
+                                            </view>
+                                        </box>
                                     </gridCell>
                                     <gridCell row="x4J-4s-p5P" column="llY-tK-mtz" id="Tjl-Tv-Z4Q">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Sp-zz-bVr">
@@ -1346,7 +1376,7 @@
                             <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vyv-Hq-eKG">
                                 <rect key="frame" x="0.0" y="0.0" width="458" height="279"/>
                                 <subviews>
-                                    <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" id="jDD-wT-aJ6">
+                                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" id="jDD-wT-aJ6">
                                         <rect key="frame" x="0.0" y="0.0" width="261" height="279"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vMA-9B-xm9">
@@ -1377,11 +1407,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" id="fR3-zO-xEo">
+                                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" id="fR3-zO-xEo">
                                         <rect key="frame" x="262" y="0.0" width="196" height="279"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
-                                            <scrollView focusRingType="none" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="DgZ-St-idz">
+                                            <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="DgZ-St-idz">
                                                 <rect key="frame" x="0.0" y="0.0" width="196" height="140"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <clipView key="contentView" id="kIQ-PD-gWV">

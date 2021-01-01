@@ -115,10 +115,7 @@ extension String {
     /// - Parameter color: 富文本的颜色
     /// - Returns: 转换后的富文本
     func colored(_ color: NSColor? = nil) -> NSMutableAttributedString {
-        guard let color = color else {
-            return NSMutableAttributedString(string: self)
-        }
-        
+        let color = color ?? .textColor
         return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
     

@@ -8,23 +8,16 @@
 import Cocoa
 
 class AddressAnalysisViewController: NSViewController {
+    
     @IBOutlet var dsymListButton: NSPopUpButton!
-
     @IBOutlet var slideAddressField: NSTextField!
-
     @IBOutlet var crashAddressField: NSTextField!
-
     @IBOutlet var noteTextView: NSTextView!
-
     @IBOutlet var historyTextView: NSTextView!
-
     @IBOutlet var analysisButton: NSButton!
-
     @IBOutlet var chooiceDSYMButton: NSButton!
 
     private var preUUID: String?
-
-    var dsym: dSYMModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,25 +25,9 @@ class AddressAnalysisViewController: NSViewController {
         noteTextView.disableAutomaticOperating()
         historyTextView.disableAutomaticOperating()
 
-        func custom(button: NSButton) {
-            button.wantsLayer = true
-            button.layer?.cornerRadius = 2
-            button.layer?.borderWidth = 1
-            button.layer?.borderColor = NSColor.gridColor.cgColor
-            button.layer?.backgroundColor = NSColor.textBackgroundColor.cgColor
-        }
-
-        custom(button: chooiceDSYMButton)
-        custom(button: analysisButton)
-
         reloadAction()
 
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: #selector(reloadAction),
-                         name: .dsymUpdated,
-                         object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAction), name: .dsymUpdated, object: nil)
     }
 
     @IBAction func chooiceDSymAction(_ sender: Any) {
