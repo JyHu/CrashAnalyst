@@ -40,7 +40,7 @@
 
 给使用者提供自己主动解析崩溃内存地址的工具，如图：
 
-![](./res/address_analysis.png)
+![](res/address_analysis.png)
 
 ```
     Thread 0 name:  Dispatch queue: apple.main-thread
@@ -79,7 +79,7 @@
 **[Tencent matrix](https://github.com/Tencent/matrix)**框架收集到的信息可以见[示例](./res/diagnostic_matrix_file.md)。
 收集到的信息都是JSON格式的，但是直观的展示样式比较难以辨认，可以把收集到的JSON信息，填入左侧输入框中，然后点击上部分的解析按钮即可在右边的列表视图中展示格式化好的信息列表。在选择行格式化信息后就会在下方显示对应格式化的内容和原始数据。
 
-![](./res/tencent_matrix_visual.png)
+![](res/tencent_matrix_visual.png)
 
 
 ## 5. 相关信息
