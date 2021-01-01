@@ -702,6 +702,18 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="0dF-V2-4Yq"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="vjF-8G-mWT"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="5fA-bZ-ICX"/>
+                                <toolbarItem implicitItemIdentifier="92D48DC9-B7FE-47CE-BDAF-E672B6F1136A" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="PM8-ss-QKx">
+                                    <nil key="toolTip"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="10n-5O-Pjk">
+                                        <rect key="frame" x="0.0" y="14" width="98" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Crash Analysis" id="eQg-HJ-flx">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="058F7B97-5739-4796-A9AC-68D440080A4B" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="h2A-gY-VRb">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="00x-T5-5AO">
@@ -722,6 +734,8 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="5fA-bZ-ICX"/>
+                                <toolbarItem reference="PM8-ss-QKx"/>
                                 <toolbarItem reference="5fA-bZ-ICX"/>
                                 <toolbarItem reference="h2A-gY-VRb"/>
                             </defaultToolbarItems>

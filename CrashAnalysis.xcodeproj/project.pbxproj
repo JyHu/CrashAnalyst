@@ -15,6 +15,14 @@
 		6682C577259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html in Resources */ = {isa = PBXBuildFile; fileRef = 6682C576259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html */; };
 		6682C5C7259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5C6259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html */; };
 		6682C5CB259EE78A00470168 /* TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682C5CA259EE78A00470168 /* TextViewExtension.swift */; };
+		6682C5D5259F221700470168 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5CF259F221700470168 /* LICENSE */; };
+		6682C5D9259F221700470168 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5D4259F221700470168 /* README.md */; };
+		6682C5DC259F2E9F00470168 /* diagnostic_crash_file.md in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5DB259F2E9F00470168 /* diagnostic_crash_file.md */; };
+		6682C5E3259F395D00470168 /* file_analysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5DF259F395D00470168 /* file_analysis.png */; };
+		6682C5E4259F395D00470168 /* address_analysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5E0259F395D00470168 /* address_analysis.png */; };
+		6682C5E5259F395D00470168 /* app_running.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5E1259F395D00470168 /* app_running.jpg */; };
+		6682C5E6259F395D00470168 /* tencent_matrix_visual.png in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5E2259F395D00470168 /* tencent_matrix_visual.png */; };
+		6682C5E9259F40FF00470168 /* diagnostic_matrix_file.md in Resources */ = {isa = PBXBuildFile; fileRef = 6682C5E8259F40FF00470168 /* diagnostic_matrix_file.md */; };
 		66AB9832258C866B000ACE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB9831258C866B000ACE57 /* AppDelegate.swift */; };
 		66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9835258C866E000ACE57 /* Assets.xcassets */; };
 		66AB9839258C866E000ACE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66AB9837258C866E000ACE57 /* Main.storyboard */; };
@@ -48,6 +56,14 @@
 		6682C576259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = diagnosing_issues_using_crash_reports_and_device_logs.html; sourceTree = "<group>"; };
 		6682C5C6259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = diagnosing_issues_using_crash_reports_and_device_logs_en.html; sourceTree = "<group>"; };
 		6682C5CA259EE78A00470168 /* TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewExtension.swift; sourceTree = "<group>"; };
+		6682C5CF259F221700470168 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6682C5D4259F221700470168 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6682C5DB259F2E9F00470168 /* diagnostic_crash_file.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = diagnostic_crash_file.md; sourceTree = "<group>"; };
+		6682C5DF259F395D00470168 /* file_analysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file_analysis.png; sourceTree = "<group>"; };
+		6682C5E0259F395D00470168 /* address_analysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address_analysis.png; sourceTree = "<group>"; };
+		6682C5E1259F395D00470168 /* app_running.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app_running.jpg; sourceTree = "<group>"; };
+		6682C5E2259F395D00470168 /* tencent_matrix_visual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tencent_matrix_visual.png; sourceTree = "<group>"; };
+		6682C5E8259F40FF00470168 /* diagnostic_matrix_file.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = diagnostic_matrix_file.md; sourceTree = "<group>"; };
 		66AB982E258C866B000ACE57 /* CrashAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AB9831258C866B000ACE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66AB9835258C866E000ACE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,9 +102,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6682C5D0259F221700470168 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				6682C5DB259F2E9F00470168 /* diagnostic_crash_file.md */,
+				6682C5E0259F395D00470168 /* address_analysis.png */,
+				6682C5E1259F395D00470168 /* app_running.jpg */,
+				6682C5DF259F395D00470168 /* file_analysis.png */,
+				6682C5E8259F40FF00470168 /* diagnostic_matrix_file.md */,
+				6682C5E2259F395D00470168 /* tencent_matrix_visual.png */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
 		66AB9825258C866B000ACE57 = {
 			isa = PBXGroup;
 			children = (
+				6682C5CF259F221700470168 /* LICENSE */,
+				6682C5D4259F221700470168 /* README.md */,
+				6682C5D0259F221700470168 /* res */,
 				66AB9830258C866B000ACE57 /* CrashAnalysis */,
 				66AB982F258C866B000ACE57 /* Products */,
 			);
@@ -227,9 +259,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6682C5C7259E309500470168 /* diagnosing_issues_using_crash_reports_and_device_logs_en.html in Resources */,
+				6682C5E6259F395D00470168 /* tencent_matrix_visual.png in Resources */,
 				6682C577259DC73D00470168 /* diagnosing_issues_using_crash_reports_and_device_logs.html in Resources */,
 				66AB9836258C866E000ACE57 /* Assets.xcassets in Resources */,
 				66AB9839258C866E000ACE57 /* Main.storyboard in Resources */,
+				6682C5D9259F221700470168 /* README.md in Resources */,
+				6682C5E4259F395D00470168 /* address_analysis.png in Resources */,
+				6682C5D5259F221700470168 /* LICENSE in Resources */,
+				6682C5E9259F40FF00470168 /* diagnostic_matrix_file.md in Resources */,
+				6682C5E5259F395D00470168 /* app_running.jpg in Resources */,
+				6682C5DC259F2E9F00470168 /* diagnostic_crash_file.md in Resources */,
+				6682C5E3259F395D00470168 /* file_analysis.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
