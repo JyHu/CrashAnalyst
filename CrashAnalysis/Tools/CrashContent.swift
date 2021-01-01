@@ -17,10 +17,11 @@ class CrashContent {
     fileprivate(set) var original: Any?
     /// 子列表
     fileprivate(set) var children: [CrashContent] = []
-    
+
     fileprivate var symbolAddr: String?
     fileprivate var instructionAddr: String?
-    
+
+    /// 原始信息
     private var _jsonString: String?
 
     /// 根据给定的参数初始化当前对象
@@ -29,27 +30,39 @@ class CrashContent {
     ///   - content: 显示的内容
     ///   - children: 子列表
     ///   - original: 原始数据
-    fileprivate init(_ title: Any, content: String = "", children: [CrashContent] = [], original: Any? = nil) {
+    fileprivate init(_ title: Any,
+                     content: String = "",
+                     children: [CrashContent] = [],
+                     original: Any? = nil) {
         self.title = title
         self.content = content
         self.children = children
         self.original = original
     }
 
-    fileprivate init(_ name: String, json: Any, camelCase: Bool = false) {
+    fileprivate init(_ name: String,
+                     json: Any,
+                     camelCase: Bool = false) {
+        
         title = camelCase ? name.replacing(string: "_", target: " ").capitalized : name
         original = json
 
         if let json = json as? Dictionary<String, Any> {
-            children = json.map({ CrashContent($0, json: $1, camelCase: camelCase) })
+            children = json.map({
+                CrashContent($0, json: $1, camelCase: camelCase)
+            })
         } else if let json = json as? Array<Any> {
-            children = json.enumerated().map({ CrashContent("\($0.offset)", json: $0.element, camelCase: camelCase) })
+            children = json
+                .enumerated()
+                .map({
+                    CrashContent("\($0.offset)", json: $0.element, camelCase: camelCase)
+                })
         } else {
             content = "\(json)"
             original = "\(json)"
         }
     }
-    
+
     /// 获取显示的原始内容字符串
     /// - Returns: 转换后的字符串
     func jsonString() -> String? {
@@ -63,20 +76,21 @@ class CrashContent {
         _jsonString = hashToString(of: json)
         return _jsonString
     }
-    
+
     /// 根据找到的dSYM解析崩溃的内存信息
     func analysis(with dSYM: dSYMModel?) {
         guard let dSYM = dSYM else {
             return
         }
-        
+
         if let symbolAddr = symbolAddr,
            let instructionAddr = instructionAddr {
             if let content = dSYM.analysis(slideAddress: symbolAddr, crashAddress: instructionAddr) {
                 self.content = "\(instructionAddr) \(symbolAddr) \(content)".colored(.red)
             }
         }
-        
+
+        /// 遍历所有子节点去解析
         if children.count > 0 {
             for child in children {
                 child.analysis(with: dSYM)
@@ -96,7 +110,7 @@ class CrashAna {
         let crash = CrashContent("Analysis", content: "")
         crash.children = analysis(json: json)
         crash.original = json
-        self.content = crash
+        content = crash
     }
 }
 
@@ -168,7 +182,7 @@ private extension CrashAna {
         /// "process_name": "Tiger Trade"
         /// "process_id": 22633
         if let process = system["process_name"],
-            let pid = system["process_id"] {
+           let pid = system["process_id"] {
             items.append(CrashContent("Process name", content: "\(process) [\(pid)]"))
         }
 
@@ -194,7 +208,7 @@ private extension CrashAna {
         /// "CFBundleShortVersionString": "5.10.0"
         /// "CFBundleVersion": "6B4D4C"
         if let version = system["CFBundleShortVersionString"] as? String,
-            let build = system["CFBundleVersion"] as? String {
+           let build = system["CFBundleVersion"] as? String {
             items.append(CrashContent("Version", content: "\(version) (\(build))"))
             self.version = version
             self.build = build
@@ -215,8 +229,8 @@ private extension CrashAna {
         /// "system_name": "macOS",
         /// "os_version": "18D109"
         if let sysVersion = system["system_version"] as? String,
-            let sysName = system["system_name"] as? String,
-            let osVersion = system["os_version"] as? String {
+           let sysName = system["system_name"] as? String,
+           let osVersion = system["os_version"] as? String {
             items.append(CrashContent("System Version", content: "\(sysName) \(sysVersion) (\(osVersion))"))
         }
 
@@ -434,17 +448,17 @@ private extension CrashAna {
         /// 将内存地址转成16进制
         let instructionHex = instructionAddr.hexString(prefix: "0x")
         let symbolName = backtrace["symbol_name"] as? String
-        
+
         let content = "\(instructionHex) \(symbolHex) \(symbolName ?? "")"
 
         let crashContent = CrashContent("\(index)  \(objectName)", content: content, original: backtrace)
-        
+
         /// 如果symbol name为空，则需要解析内存地址
         if symbolName == nil {
             crashContent.symbolAddr = symbolHex
             crashContent.instructionAddr = instructionHex
         }
-        
+
         /// 0x00007FFF60CC6220
         /// 0x00007fff90420ebc
         return crashContent

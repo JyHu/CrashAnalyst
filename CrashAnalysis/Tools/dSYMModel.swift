@@ -10,6 +10,7 @@ import Foundation
 
 private let dsymPattern = "UUID:\\s+([\\w-]+)\\s+\\((\\w+)\\)\\s+(.+)$"
 
+/// 存储dSYM信息的对象
 class dSYMModel {
     /// 打包版本
     var version: String = ""
@@ -24,7 +25,7 @@ class dSYMModel {
     var path: String = ""
 
     /// dSYM文件所在的目录
-    var location: String!
+    var location: String = ""
 
     /// 当前dSYM所在的归档文件所在路径
     var archiveUrl: URL?
@@ -34,19 +35,32 @@ class dSYMModel {
     var uuid: String?
 
     var dwarfFile: String?
-    
+
     /// 是否是外部引入进来的
     var isImported: Bool = false
-    
+
+    /// 创建日期
+    var creationDateString: String? {
+        if cachedCreationDateString == nil, let archiveInfo = archiveInfo {
+            cachedCreationDateString = (archiveInfo["CreationDate"] as? Date)?.stringValue
+        }
+
+        return cachedCreationDateString
+    }
+
+    private var cachedCreationDateString: String?
+
+    /// 归档文件的信息
+    var archiveInfo: [String: Any]?
+
     /// 用于排序比较的key
     private var compareKey: String!
-    
+
     /// 初始化方法
     /// - Parameters:
     ///   - url: dSYM文件地址
     ///   - imported: 是否是外部引入进来的
     init?(url: URL, imported: Bool = false) {
-        
         /// dSYM文件中的配置信息文件
         let infoURL = url.appendingPathComponent("/Contents/Info.plist")
 
@@ -63,13 +77,13 @@ class dSYMModel {
         path = url.path
         location = url.deletingLastPathComponent().path
 
-        self.isImported = imported
+        isImported = imported
         self.version = version
         self.build = build
         self.identifier = identifier
-        self.compareKey = "\(self.identifier)\(self.version)\(self.build)"
+        compareKey = "\(self.identifier)\(self.version)\(self.build)"
     }
-    
+
     /// 解析当前dSYM文件中的arch uuid
     func dump() {
         guard
@@ -88,14 +102,14 @@ class dSYMModel {
 
         self.uuid = uuid
         self.arch = arch
-        
+
         dwarfFile = dpath
 
         /// 获取cpu类型
         /// dwarfdump --uuid ~/Library/Developer/Xcode/Archives/2020-07-03/Stock-Mac-Release\ 2020-7-3\,\ 9.43\ PM.xcarchive/dSYMs/Tiger\ Trade.app.dSYM
         /// UUID: EE396B01-3C64-33E6-BFD1-26C2C41C0ED2 (x86_64) /Users/hujinyou/Library/Developer/Xcode/Archives/2020-07-03/Stock-Mac-Release 2020-7-3, 9.43 PM.xcarchive/dSYMs/Tiger Trade.app.dSYM/Contents/Resources/DWARF/Tiger Trade
     }
-    
+
     /// 使用当前dSYM文件解析崩溃日志内存地址
     /// - Parameters:
     ///   - slideAddress: slide address
@@ -106,16 +120,19 @@ class dSYMModel {
             dump()
         }
 
-        guard let arch = self.arch, let dwarfFile = self.dwarfFile else {
+        guard let arch = self.arch,
+              let dwarfFile = self.dwarfFile else {
             return nil
         }
 
-        return execute("xcrun atos -arch \(arch) -o \"\(dwarfFile)\" -l \(slideAddress) \(crashAddress)") as? String
+        return execute(
+            "xcrun atos -arch \(arch) -o \"\(dwarfFile)\" -l \(slideAddress) \(crashAddress)"
+        ) as? String
     }
-    
+
     /// 比较两个dSYM文件
     /// - Returns: 比较的结果
     func compare(with dSYM: dSYMModel) -> ComparisonResult {
-        return self.compareKey.compare(dSYM.compareKey)
+        return compareKey.compare(dSYM.compareKey)
     }
 }

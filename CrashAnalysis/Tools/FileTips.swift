@@ -42,7 +42,7 @@ struct FileTips {
 <br><br>
 
 <pre style="color:#708090">
-    Incident Identifier: CC97F21E-A2E1-49E8-9D6A-487E950A261A
+    Identifier: CC97F21E-A2E1-49E8-9D6A-487E950A261A
     CrashReporter Key:   fc217c5977c6b6790ea1d618461e2e1b04293b13
     Hardware Model:      iPhone3,1
     Process:         Crash-Tester [862]
@@ -268,6 +268,7 @@ struct FileTips {
         return NSAttributedString(html: data, documentAttributes: nil)
     }
     
+    /// martix可视化的提示
     static var martixTips: NSAttributedString? {
         let html =
 """

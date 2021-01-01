@@ -67,31 +67,75 @@ class dSYMManager {
         return nil
     }
     
-    /// 筛选url列表中的文件
-    /// - Parameter urls: url列表，可以是各种类型，包括文件夹、dSYM、archive文件
-    /// - Returns: 查找到的dSYM文件列表
-    func pickup(at urls: [URL]) -> [dSYMModel] {
-        var results: [dSYMModel] = []
-        for url in urls {
+    /// 获取有效的dSYM，如果没有，会主动弹窗让使用者选择一次
+    /// - Parameters:
+    ///   - bundleID: bundler identifier
+    ///   - version: 版本号
+    ///   - build: build号
+    /// - Returns: 对应的dSYM Model对象，如果没有找到，就会返回nil
+    func effectiveDSYMWith(bundleID: String,
+                           version: String,
+                           build: String) -> dSYMModel? {
+        /// 先从本地获取一次，如果获取到就直接返回
+        if let dSYM = dSYMFrom(bundleID: bundleID,
+                               version: version,
+                               build: build) {
+            return dSYM
+        }
+        
+        /// 如果没有找到会让使用者主动选择一次，
+        /// 如果使用者确定选择后会再次从本地查找一次
+        if chooiceDSYM() == .OK {
+            return dSYMFrom(bundleID: bundleID, version: version, build: build)
+        }
+        
+        return nil
+    }
+    
+    /// 打开选择窗口提供主动选择dSYM文件的操作，
+    /// 如果用户确定选择了，在筛选后会发送一次通知出去
+    ///
+    /// 允许选择文件夹、文件、选择多个文件
+    ///
+    /// - Returns: 用户选择的结果
+    func chooiceDSYM() -> NSApplication.ModalResponse {
+        let openPanel = NSOpenPanel()
+        openPanel.title = "Chooice dSym files or  directory"
+        openPanel.canChooseFiles = true
+        openPanel.canChooseDirectories = true
+        openPanel.allowedFileTypes = [
+            dSYMExtension.dSYM,
+            dSYMExtension.archive
+        ]
+        
+        let response = openPanel.runModal()
+        
+        /// 如果用户没有确定选择，就直接返回结果
+        if response != .OK {
+            return response
+        }
+        
+        /// 遍历选择的所有文件
+        for url in openPanel.urls {
+            
             /// dSYM文件
             if url.pathExtension == dSYMExtension.dSYM {
-                if let dSYM = appendWith(dSYMURL: url, imported: true) {
-                    results.append(dSYM)
-                }
+                let _ = appendWith(dSYMURL: url, imported: true)
             }
             /// archive文件
             else if url.pathExtension == dSYMExtension.archive {
-                if let dSYM = appendWith(archiveURL: url, imported: true) {
-                    results.append(dSYM)
-                }
+                let  _ = appendWith(archiveURL: url, imported: true)
             }
             /// 文件夹
             else {
-                results.append(contentsOf: enumerated(at: url, imported: true))
+                let _ = enumerated(at: url, imported: true)
             }
         }
         
-        return results
+        /// 发送dSYM变动的通知
+        NotificationCenter.default.post(name: .dsymUpdated, object: nil)
+        
+        return response
     }
 }
 
@@ -182,10 +226,18 @@ private extension dSYMManager {
         else {
             return nil
         }
-
+        
+        /// 归档文件的信息
+        let infoUrl = archiveURL.appendingPathComponent("Info.plist")
         let dSYMUrl = URL(fileURLWithPath: "\(dSYMsPath)/\(dSYMFile)")
         let dSYM = appendWith(dSYMURL: dSYMUrl, imported: imported)
         dSYM?.archiveUrl = archiveURL
+        
+        if let data = try? Data(contentsOf: infoUrl),
+           let info = try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: Any] {
+            dSYM?.archiveInfo = info
+        }
+        
         return dSYM
     }
     

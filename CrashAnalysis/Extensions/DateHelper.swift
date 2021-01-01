@@ -26,4 +26,9 @@ extension Date {
     static var logDate: String {
         return Formatter.shared.logFormatter.string(from: Date())
     }
+    
+    /// 转成本地时间的字符串
+    var stringValue: String {
+        return Formatter.shared.logFormatter.string(from: self)
+    }
 }

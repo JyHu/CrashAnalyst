@@ -36,7 +36,7 @@ func hashToString(of object: Any, level: Int = 0) -> String {
     return hashStringOf(object: object)
 }
 
-extension Dictionary where Key: Comparable {
+private extension Dictionary where Key: Comparable {
     func toStringWith(level: Int) -> String {
         return "{\n".appending(sorted(by: { $0.key < $1.key }).map { (key, value) -> String in
             let tabs = "\(space(with: level + 1))\"\(key)\": "
@@ -54,7 +54,7 @@ extension Dictionary where Key: Comparable {
     }
 }
 
-extension Array {
+private extension Array {
     func toStringWith(level: Int) -> String {
         return "[\n".appending(map({ object -> String in
             let tabs = "\(space(with: level + 1))"

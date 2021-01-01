@@ -28,6 +28,8 @@ class FileAnalysisViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textView.disableAutomaticOperating()
+        
         let options: NSRegularExpression.Options = [.caseInsensitive, .anchorsMatchLines]
         let bundleIDPattern = "^Identifier:\\s+([\\w-\\.]+)$"
         let versionPattern = "^Version:\\s+([\\d\\.]+)\\s*?\\(([\\w]+)\\)"
@@ -94,7 +96,7 @@ class FileAnalysisViewController: NSViewController {
             return
         }
 
-        guard let dSYM = dsym(with: bundleID, version: version, build: build) else {
+        guard let dSYM = dSYMManager.shared.effectiveDSYMWith(bundleID: bundleID, version: version, build: build) else {
             return
         }
 
@@ -111,27 +113,5 @@ class FileAnalysisViewController: NSViewController {
             bundleAddress = address
             addressReg = reg
         }
-    }
-    
-    private func dsym(with bundleID: String, version: String, build: String) -> dSYMModel? {
-        if let dSYM = dSYMManager.shared.dSYMFrom(bundleID: bundleID, version: version, build: build) {
-            return dSYM
-        }
-
-        let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = ["xcarchive", "dSYM"]
-        openPanel.canChooseFiles = true
-        openPanel.canChooseDirectories = false
-        openPanel.allowsMultipleSelection = false
-
-        guard openPanel.runModal() == .OK else {
-            return nil
-        }
-
-        guard let url = openPanel.url else {
-            return nil
-        }
-
-        return dSYMManager.shared.append(with: url)
     }
 }
