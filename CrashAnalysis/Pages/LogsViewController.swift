@@ -18,19 +18,18 @@ func xlog(_ log: NSAttributedString) {
 }
 
 class LogsViewController: NSViewController {
-
     @IBOutlet var textView: NSTextView!
-    
+
     override func viewDidLoad() {
-        super.viewDidLoad()    
+        super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(appendLog(_:)), name: .log, object: nil)
-        
+
         let menu = NSMenu()
-        
+
         let item = NSMenuItem(title: "Clear", action: #selector(clearAction), keyEquivalent: "")
         item.target = self
         menu.addItem(item)
-        
+
         textView.menu = menu
     }
 }
@@ -40,20 +39,19 @@ private extension LogsViewController {
         guard let storage = textView.textStorage else {
             return
         }
-        
+
         storage.append(Date.logDate.colored(.secondaryLabelColor))
-        
         storage.append(" ")
-        
+
         if let log = notification.object as? String {
             storage.append(log.colored(.textColor))
         } else if let log = notification.object as? NSAttributedString {
             storage.append(log)
         }
-        
+
         storage.append("\n".colored())
     }
-    
+
     @objc func clearAction() {
         textView.string = ""
     }

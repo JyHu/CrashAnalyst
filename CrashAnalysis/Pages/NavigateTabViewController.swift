@@ -8,23 +8,23 @@
 import Cocoa
 
 class NavigateTabViewController: NSTabViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
-    
+
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
-        
+
         guard let tabViewItem = tabViewItem else {
             return
         }
-        
+
+        let notifyCenter = NotificationCenter.default
         if tabView.indexOfTabViewItem(tabViewItem) == 0 {
-            NotificationCenter.default.post(name: .switchMainTab, object: MainTab.dSYM)
+            notifyCenter.post(name: .switchMainTab, object: MainTab.dSYM)
         } else {
-            NotificationCenter.default.post(name: .switchMainTab, object: MainTab.doc)
+            notifyCenter.post(name: .switchMainTab, object: MainTab.doc)
         }
     }
 }

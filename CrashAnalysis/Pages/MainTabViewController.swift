@@ -8,21 +8,16 @@
 import Cocoa
 
 class MainTabViewController: NSTabViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(switchAction(_:)), name: .switchMainTab, object: nil)
     }
-    
+
     @objc private func switchAction(_ notification: NSNotification) {
         guard let object = notification.object as? MainTab else {
             return
         }
-        
-        if object == .dSYM {
-            selectedTabViewItemIndex = 0
-        } else {
-            selectedTabViewItemIndex = 1
-        }
+
+        selectedTabViewItemIndex = (object == .dSYM ? 0 : 1)
     }
 }

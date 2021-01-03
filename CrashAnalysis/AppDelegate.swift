@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func reloadDSyms(_ sender: Any) {
-        dSYMManager.shared.reload()
+        dSYMManager.shared.loadArchives()
     }
 }
 

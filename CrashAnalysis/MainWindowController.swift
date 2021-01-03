@@ -16,7 +16,7 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     
-        dSYMManager.shared.reload()
+        dSYMManager.shared.loadArchives()
         
         NotificationCenter.default.addObserver(self, selector: #selector(switchMainTabAction(_:)), name: .switchMainTab, object: nil)
     }
@@ -31,12 +31,14 @@ class MainWindowController: NSWindowController {
     }
 
     @IBAction func analysisTypeAction(_ sender: NSSegmentedControl) {
+        let notifyCenter = NotificationCenter.default
+        
         if sender.selectedSegment == 0 {
-            NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.file)
+            notifyCenter.post(name: .switchAnalysis, object: AnalysisType.file)
         } else if sender.selectedSegment == 1 {
-            NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.address)
+            notifyCenter.post(name: .switchAnalysis, object: AnalysisType.address)
         } else if sender.selectedSegment == 2 {
-            NotificationCenter.default.post(name: .switchAnalysis, object: AnalysisType.matrix)
+            notifyCenter.post(name: .switchAnalysis, object: AnalysisType.matrix)
         }
     }
     

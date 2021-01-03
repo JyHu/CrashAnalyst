@@ -15,7 +15,7 @@ extension NSAlert {
     ///   - title: 提示标题
     static func display(_ message: String, title: String? = nil) {
         let alert = NSAlert()
-        if let title = title {        
+        if let title = title {
             alert.messageText = title
         }
         alert.informativeText = message

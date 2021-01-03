@@ -735,7 +735,7 @@
                                 <toolbarItem implicitItemIdentifier="F42290CB-AB5C-4B83-AB25-0F0EF1D9FA3A" label="Add" paletteLabel="Add" image="NSAddTemplate" id="Y5L-LM-fkd">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="36" height="32"/>
-                                    <size key="maxSize" width="82" height="32"/>
+                                    <size key="maxSize" width="36" height="32"/>
                                     <button key="view" verticalHuggingPriority="750" id="EtX-KJ-yTV">
                                         <rect key="frame" x="0.0" y="14" width="82" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

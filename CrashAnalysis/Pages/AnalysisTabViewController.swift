@@ -8,7 +8,6 @@
 import Cocoa
 
 class AnalysisTabViewController: NSTabViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(switchAnalysisTypeAction(_:)), name: .switchAnalysis, object: nil)
@@ -20,18 +19,18 @@ private extension AnalysisTabViewController {
         guard let type = notification.object as? AnalysisType else {
             return
         }
-        
+
         if type == .file {
-            if self.tabViewItems.count >= 1 {
-                self.selectedTabViewItemIndex = 0
+            if tabViewItems.count >= 1 {
+                selectedTabViewItemIndex = 0
             }
         } else if type == .address {
-            if self.tabViewItems.count >= 2 {
-                self.selectedTabViewItemIndex = 1
+            if tabViewItems.count >= 2 {
+                selectedTabViewItemIndex = 1
             }
         } else if type == .matrix {
-            if self.tabViewItems.count >= 3 {
-                self.selectedTabViewItemIndex = 2
+            if tabViewItems.count >= 3 {
+                selectedTabViewItemIndex = 2
             }
         }
     }

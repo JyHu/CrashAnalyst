@@ -8,8 +8,10 @@
 
 import Cocoa
 
-struct dSYMExtension {
+private struct dSYMExtension {
+    /// 归档文件后缀
     static let archive: String = "xcarchive"
+    /// dSYM文件后缀
     static let dSYM: String = "dSYM"
 }
 
@@ -21,11 +23,14 @@ class dSYMManager {
     /// 缓存的所有dsym
     private(set) var dSYMs: [dSYMModel] = []
 
-    /// 刷新所有的归档的的SYM文件列表，外部引入的不管
-    func reload() {
+    /// 遍历本地Xcode归档数据，添加dSYM
+    func loadArchives() {
         dSYMs.removeAll(where: { $0.isImported ? !FileManager.default.fileExists(atPath: $0.path) : true })
-        /// 加载本地Xcode归档的dsym
-        loadArchives()
+        
+        let archivesPath = NSHomeDirectory().appending("/Library/Developer/Xcode/Archives/")
+        let url = URL(fileURLWithPath: archivesPath)
+        let _ = enumerated(at: url)
+        NotificationCenter.default.post(name: .dsymUpdated, object: nil)
     }
     
     /// 根据给定的参数获取对应的dSYM文件
@@ -33,60 +38,33 @@ class dSYMManager {
     ///   - bundleID: bundler identifier
     ///   - version: 版本号
     ///   - build: build号
+    ///   - effective: 如果为true，在本地没有找到有效的dSYM的时候会弹出选择窗口让使用者主动选择一次
     /// - Returns: 对应的dSYM Model对象，如果没有找到，就会返回nil
-    func dSYMFrom(bundleID: String, version: String, build: String) -> dSYMModel? {
-        guard let dSYM = dSYMs.first(where: {
-            $0.identifier == bundleID && $0.version == version && $0.build == build
-        }) else {
-            return nil
+    func dSYMFrom(bundleID: String, version: String, build: String, effective: Bool = true) -> dSYMModel? {
+        
+        func findDSYM() -> dSYMModel? {
+            guard let dSYM = dSYMs.first(where: {
+                $0.identifier == bundleID && $0.version == version && $0.build == build
+            }) else {
+                return nil
+            }
+            
+            /// 如果没有做过dump，就没有这俩字段
+            if dSYM.uuid == nil || dSYM.arch == nil {
+                dSYM.dump()
+            }
+            
+            return dSYM
         }
         
-        /// 如果没有做过dump，就没有这俩字段
-        if dSYM.uuid == nil || dSYM.arch == nil {
-            dSYM.dump()
-        }
-        
-        return dSYM
-    }
-    
-    /// 根据给定的url添加对应的dSYM数据对象
-    /// - Parameter url: 资源地址
-    /// - Returns: 添加的dSYM对象
-    func append(with url: URL) -> dSYMModel? {
-        
-        /// 根据Xcode的归档的数据添加dSYM
-        if url.pathExtension == dSYMExtension.archive {
-            return appendWith(archiveURL: url, imported: true)
-        }
-        
-        /// 添加dSYM数据
-        if url.pathExtension == dSYMExtension.dSYM {
-            return appendWith(dSYMURL: url, imported: true)
-        }
-        
-        return nil
-    }
-    
-    /// 获取有效的dSYM，如果没有，会主动弹窗让使用者选择一次
-    /// - Parameters:
-    ///   - bundleID: bundler identifier
-    ///   - version: 版本号
-    ///   - build: build号
-    /// - Returns: 对应的dSYM Model对象，如果没有找到，就会返回nil
-    func effectiveDSYMWith(bundleID: String,
-                           version: String,
-                           build: String) -> dSYMModel? {
-        /// 先从本地获取一次，如果获取到就直接返回
-        if let dSYM = dSYMFrom(bundleID: bundleID,
-                               version: version,
-                               build: build) {
+        if let dSYM = findDSYM() {
             return dSYM
         }
         
         /// 如果没有找到会让使用者主动选择一次，
         /// 如果使用者确定选择后会再次从本地查找一次
         if chooiceDSYM() == .OK {
-            return dSYMFrom(bundleID: bundleID, version: version, build: build)
+            return findDSYM()
         }
         
         return nil
@@ -140,16 +118,7 @@ class dSYMManager {
 }
 
 private extension dSYMManager {
-    
-    /// 遍历本地Xcode归档数据，添加dSYM
-    func loadArchives() {
-        let archivesPath = NSHomeDirectory().appending("/Library/Developer/Xcode/Archives/")
-        let url = URL(fileURLWithPath: archivesPath)
-        let _ = enumerated(at: url)
-        NotificationCenter.default.post(name: .dsymUpdated, object: nil)
-    }
-    
-    
+        
     /// 枚举当前目录下的所有dSYM文件
     /// - Parameters:
     ///   - url: 需要枚举的目录
@@ -263,5 +232,23 @@ private extension dSYMManager {
             return dSYM1.compare(with: dSYM2) == .orderedAscending
         }
         return dSYM
+    }
+    
+    /// 根据给定的url添加对应的dSYM数据对象
+    /// - Parameter url: 资源地址
+    /// - Returns: 添加的dSYM对象
+    func append(with url: URL) -> dSYMModel? {
+        
+        /// 根据Xcode的归档的数据添加dSYM
+        if url.pathExtension == dSYMExtension.archive {
+            return appendWith(archiveURL: url, imported: true)
+        }
+        
+        /// 添加dSYM数据
+        if url.pathExtension == dSYMExtension.dSYM {
+            return appendWith(dSYMURL: url, imported: true)
+        }
+        
+        return nil
     }
 }

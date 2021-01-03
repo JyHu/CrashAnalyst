@@ -96,7 +96,7 @@ class FileAnalysisViewController: NSViewController {
             return
         }
 
-        guard let dSYM = dSYMManager.shared.effectiveDSYMWith(bundleID: bundleID, version: version, build: build) else {
+        guard let dSYM = dSYMManager.shared.dSYMFrom(bundleID: bundleID, version: version, build: build) else {
             return
         }
 
