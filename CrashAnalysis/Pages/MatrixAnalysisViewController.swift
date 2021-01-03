@@ -51,14 +51,11 @@ class MatrixAnalysisViewController: NSViewController {
 
         let ana = CrashAna(json)
 
-        let dSYM = dSYMManager.shared.dSYMFrom(bundleID: ana.identifier, version: ana.version, build: ana.build)
-
-        if dSYM != nil {
-            pathButton.title = dSYM!.location
+        if let dSYM = dSYMManager.shared.effectiveDSYMWith(bundleID: ana.identifier, version: ana.version, build: ana.build) {
+            pathButton.title = dSYM.location
+            ana.content.analysis(with: dSYM)
         }
-
-        ana.content.analysis(with: dSYM)
-
+        
         reload(ana)
     }
 
