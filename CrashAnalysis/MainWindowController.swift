@@ -11,6 +11,8 @@ class MainWindowController: NSWindowController {
 
     @IBOutlet weak var segmentedControl: NSSegmentedControl!
     
+    @IBOutlet weak var chooiceButton: NSButton!
+    
     override func windowDidLoad() {
         super.windowDidLoad()
     
@@ -25,6 +27,7 @@ class MainWindowController: NSWindowController {
         }
         
         segmentedControl.isHidden = object == .doc
+        chooiceButton.isHidden = object == .doc
     }
 
     @IBAction func analysisTypeAction(_ sender: NSSegmentedControl) {
@@ -37,4 +40,9 @@ class MainWindowController: NSWindowController {
         }
     }
     
+    @IBAction func chooiceDSYMAction(_ sender: Any) {
+        if dSYMManager.shared.chooiceDSYM() == .OK {
+            NSAlert.display("筛选成功 ！！！", title: "提醒")
+        }
+    }
 }

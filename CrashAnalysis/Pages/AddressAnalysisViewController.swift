@@ -15,7 +15,6 @@ class AddressAnalysisViewController: NSViewController {
     @IBOutlet var noteTextView: NSTextView!
     @IBOutlet var historyTextView: NSTextView!
     @IBOutlet var analysisButton: NSButton!
-    @IBOutlet var chooiceDSYMButton: NSButton!
 
     private var preUUID: String?
 
@@ -28,10 +27,6 @@ class AddressAnalysisViewController: NSViewController {
         reloadAction()
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAction), name: .dsymUpdated, object: nil)
-    }
-
-    @IBAction func chooiceDSymAction(_ sender: Any) {
-        _ = dSYMManager.shared.chooiceDSYM()
     }
 
     @IBAction func analysisAction(_ sender: NSButton) {
