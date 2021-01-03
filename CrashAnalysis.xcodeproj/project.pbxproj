@@ -207,6 +207,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66AB983E258C866E000ACE57 /* Build configuration list for PBXNativeTarget "CrashAnalysis" */;
 			buildPhases = (
+				6682C67125A1D37E00470168 /* update build */,
 				66AB982A258C866B000ACE57 /* Sources */,
 				66AB982B258C866B000ACE57 /* Frameworks */,
 				66AB982C258C866B000ACE57 /* Resources */,
@@ -277,6 +278,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6682C67125A1D37E00470168 /* update build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "update build";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nbuildNumber=$(echo \"ibase=10;obase=16;$(date +%m%d%H%M)\" | bc)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		66AB982A258C866B000ACE57 /* Sources */ = {
@@ -458,6 +480,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.auu.CrashAnalysis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -480,6 +503,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.auu.CrashAnalysis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
