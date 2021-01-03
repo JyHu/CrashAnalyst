@@ -7,7 +7,7 @@
 1. 状态栏右侧可以切换分析崩溃信息的方式，有以下几种：
     - 直接分析崩溃日志文件
     - 按崩溃内存地址自己按条的去解析崩溃信息
-    - Tencent matrix框架收集到的崩溃信息可视化显示工具
+    - `Tencent matrix`框架收集到的崩溃信息可视化显示工具
 2. 左侧是列表导航页面
     - 崩溃信息辅助页面，上部分是dSYM文件列表，下部分是选中dSYM后的概要信息
     - 辅助文档列表(待接入)
@@ -18,7 +18,7 @@
 
 **使用说明**
 
-1. 将[崩溃日志原始文件](./res/diagnostic_crash_file.md)copy到当前输入框内
+1. 将[崩溃日志原始文件](./res/diagnostic_crash_file.md) copy到当前输入框内
 2. 选择 dSYM 按钮，系统会自动筛选出对应的 dSYM 文件
 3. 如果有有效的文件被选择，会在右边显示出对应的文件地址，如果没有，则会有选择文件的弹窗弹出，提示用户去选择dSYM文件或者归档文件
 4. 有效的文件被找到后，Analysis按钮会置为可点击状态
@@ -27,7 +27,7 @@
 **其他说明**
 
 1. 启动app后，系统会自动遍历Xcode在本地的所有归档文件，从中获取对应的dSYM文件
-2. command+shift+R 重新刷新本地的dSYM文件
+2. `command+shift+R` 重新刷新本地的dSYM文件
 3. 解析成功后，被成功解析的结果会在崩溃地址后以红色内容显示
 4. 底部窗口会显示操作日志
 
@@ -76,7 +76,7 @@
 
 ## 4. Tencent matrix 收集到的文件解析
 
-**[Tencent matrix](https://github.com/Tencent/matrix)**框架收集到的信息可以见[示例](./res/diagnostic_matrix_file.md)。
+[Tencent matrix](https://github.com/Tencent/matrix) 框架收集到的信息可以见[示例](./res/diagnostic_matrix_file.md)。
 收集到的信息都是JSON格式的，但是直观的展示样式比较难以辨认，可以把收集到的JSON信息，填入左侧输入框中，然后点击上部分的解析按钮即可在右边的列表视图中展示格式化好的信息列表。在选择行格式化信息后就会在下方显示对应格式化的内容和原始数据。
 
 ![](res/tencent_matrix_visual.png)
@@ -86,7 +86,7 @@
 
 ### 1）归档文件地址
 
-每次打包后都会在本地生成一个归档文件，所有归档文件都在[/Library/Developer/Xcode/Archives/](file:///Library/Developer/Xcode/Archives/)目录下，而dSYM文件则在归档文件中的`dSYM`目录下。
+每次打包后都会在本地生成一个归档文件，所有归档文件都在 `/Library/Developer/Xcode/Archives/` 目录下，而`dSYM`文件则在归档文件中的`dSYM`目录下。
 
 ### 2）解析dSYM文件对应的uuid和架构
 
