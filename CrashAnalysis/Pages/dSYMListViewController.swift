@@ -8,79 +8,83 @@
 import Cocoa
 
 private extension NSUserInterfaceItemIdentifier {
-    /// 索引列id
-    static let index = NSUserInterfaceItemIdentifier("com.auu.dsymList.index")
     /// 标识列id
     static let identifier = NSUserInterfaceItemIdentifier("com.auu.dsymList.identifier")
-    /// 版本号id
-    static let version = NSUserInterfaceItemIdentifier("com.auu.dsymList.version")
 }
 
 class dSYMListViewController: NSViewController {
+    
     /// 显示dSYM的列表
-    @IBOutlet var tableView: NSTableView!
-
+    @IBOutlet weak var outlineView: NSOutlineView!
+    
     /// 显示选中dSYM的信息
     @IBOutlet var descTextView: NSTextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: #selector(reloadAction),
-                         name: .dsymUpdated,
-                         object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAction), name: .dsymUpdated, object: nil)
     }
 
     /// 单击事件
-    @IBAction func clickAction(_ sender: NSTableView) {
-        showContent(at: sender.selectedRow)
+    @IBAction func clickAction(_ sender: NSOutlineView) {
+        showContent(with: sender.item(atRow: sender.selectedRow))
     }
-
+    
     /// 双击事件
-    @IBAction func doubleClickAction(_ sender: NSTableView) {
-        if let dSYM = activeDSYM(sender.selectedRow) {
-            let url = URL(fileURLWithPath: dSYM.location)
-            NSWorkspace.shared.open(url)
-        }
+    @IBAction func doubleClickAction(_ sender: NSOutlineView) {
+        showContent(with: sender.item(atRow: sender.selectedRow))
     }
 }
 
-extension dSYMListViewController: NSTableViewDelegate, NSTableViewDataSource {
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return dSYMManager.shared.dSYMs.count
+extension dSYMListViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if let proj = item as? ProjModel {
+            return proj.dSYMs.count
+        }
+        
+        return dSYMManager.shared.projs.count
     }
-
-    func tableView(_ tableView: NSTableView,
-                   objectValueFor tableColumn: NSTableColumn?,
-                   row: Int) -> Any? {
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if let proj = item as? ProjModel {
+            return proj.dSYMs[index]
+        }
+        
+        return dSYMManager.shared.projs[index]
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+        return item is ProjModel
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        return item is ProjModel
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         
         guard let identifier = tableColumn?.identifier else {
             return nil
         }
-
-        let dsym = dSYMManager.shared.dSYMs[row]
-
-        if identifier == .index {
-            return "\(row)"
+        
+        if let proj = item as? ProjModel {
+            return identifier == .identifier ? proj.identifier : nil
+        }
+        
+        guard let dsym = item as? dSYMModel else {
+            return nil
         }
 
         if identifier == .identifier {
-            return dsym.identifier
-        }
-
-        if identifier == .version {
-            return "\(dsym.version)(\(dsym.build))"
+            return "\(dsym.version)  (\(dsym.build))"
         }
 
         return nil
     }
-
-    func tableView(_ tableView: NSTableView,
-                   shouldSelectRow row: Int) -> Bool {
-        showContent(at: row)
+    
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        showContent(with: item)
         return true
     }
 }
@@ -88,37 +92,47 @@ extension dSYMListViewController: NSTableViewDelegate, NSTableViewDataSource {
 private extension dSYMListViewController {
     /// 刷新列表
     @objc func reloadAction() {
-        tableView.reloadData()
+        outlineView.reloadData()
+        outlineView.expandItem(nil, expandChildren: true)
     }
 
-    /// 当前选中的活跃的dSYM文件
-    /// - Parameter row: 行，如果没传入，会默认使用tableView选择的行
-    /// - Returns: dSYM文件
-    func activeDSYM(_ row: Int?) -> dSYMModel? {
-        let selectedRow = row ?? tableView.selectedRow
-        let dSYMs = dSYMManager.shared.dSYMs
-
-        /// 判断行的有效
-        if selectedRow >= 0 && selectedRow < dSYMs.count {
-            return dSYMs[selectedRow]
-        }
-
-        return nil
-    }
-
-    /// 显示对应行的dSYM的概要信息
-    func showContent(at row: Int?) {
-        guard let row = row,
-              let dSYM = activeDSYM(row) else {
+    /// 显示对应行的概要信息
+    func showContent(with object: Any?) {
+        if let dSYM = object as? dSYMModel {
+            show(dSYM)
+        } else if let proj = object as? ProjModel {
+            show(proj)
+        } else {
             descTextView.string = ""
-            return
+        }
+    }
+    
+    func redirectContent(of dSYM: dSYMModel) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: "")
+        
+        if let archiveURL = dSYM.archiveUrl {
+            let attr = [NSAttributedString.Key.link: archiveURL]
+            attributedString.append("Archive", attributes: attr)
+            attributedString.append("  ")
         }
 
         let dSYMUrl = URL(fileURLWithPath: dSYM.path)
+        attributedString.append("dSYM", attributes: [NSAttributedString.Key.link: dSYMUrl])
 
+        if let dwarfFile = dSYM.dwarfFile {
+            let attr = [NSAttributedString.Key.link: URL(fileURLWithPath: dwarfFile)]
+            attributedString.append("  ")
+            attributedString.append("DWARF", attributes: attr)
+        }
+        
+        return attributedString
+    }
+    
+    func show(_ dSYM: dSYMModel) {
+        
         let attrInfo = NSMutableAttributedString(string: "")
         attrInfo.append("Identifier :  \(dSYM.identifier)\n")
-        attrInfo.append("Version :  \(dSYM.version)(\(dSYM.build))\n")
+        attrInfo.append("Version :  \(dSYM.version)  (\(dSYM.build))\n")
 
         if let uuid = dSYM.uuid, let arch = dSYM.arch {
             attrInfo.append("UUID :  \(uuid) (\(arch))\n")
@@ -129,23 +143,23 @@ private extension dSYMListViewController {
         }
 
         attrInfo.append("\n")
-
         attrInfo.append("Open:\n")
-        
-        if let archiveURL = dSYM.archiveUrl {
-            let attr = [NSAttributedString.Key.link: archiveURL]
-            attrInfo.append("Archive", attributes: attr)
-            attrInfo.append("  ")
-        }
-
-        attrInfo.append("dSYM", attributes: [NSAttributedString.Key.link: dSYMUrl])
-
-        if let dwarfFile = dSYM.dwarfFile {
-            let attr = [NSAttributedString.Key.link: URL(fileURLWithPath: dwarfFile)]
-            attrInfo.append("  ")
-            attrInfo.append("DWARF", attributes: attr)
-        }
+        attrInfo.append(redirectContent(of: dSYM))
 
         descTextView.textStorage?.setAttributedString(attrInfo)
+    }
+    
+    func show(_ proj: ProjModel) {
+        let attributedString = NSMutableAttributedString(string: "")
+        attributedString.append("\(proj.identifier) (\(proj.dSYMs.count))\n")
+        
+        for (index, dSYM) in proj.dSYMs.enumerated() {
+            attributedString.append(String(format: "%8d", index))
+            attributedString.append(" - \(dSYM.version) (\(dSYM.build)) :  ")
+            attributedString.append(redirectContent(of: dSYM))
+            attributedString.append("\n")
+        }
+        
+        descTextView.textStorage?.setAttributedString(attributedString)
     }
 }

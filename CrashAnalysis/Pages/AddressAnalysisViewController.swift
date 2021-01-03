@@ -15,6 +15,8 @@ class AddressAnalysisViewController: NSViewController {
     @IBOutlet var noteTextView: NSTextView!
     @IBOutlet var historyTextView: NSTextView!
     @IBOutlet var analysisButton: NSButton!
+    
+    private var dSYMs: [dSYMModel] = []
 
     private var preUUID: String?
 
@@ -37,13 +39,14 @@ class AddressAnalysisViewController: NSViewController {
 
         sender.isEnabled = false
 
-        let dsym = dSYMManager.shared.dSYMs[dsymListButton.indexOfSelectedItem]
+        let dsym = dSYMs[dsymListButton.indexOfSelectedItem]
         let res = dsym.analysis(slideAddress: slideAddress, crashAddress: crashAddress)
 
         func appendDSYM() {
             let dinfo = "\(dsym.identifier) \(dsym.version)(\(dsym.build)) "
             let attr = [NSAttributedString.Key.link: URL(fileURLWithPath: dsym.location)]
 
+            historyTextView.textStorage?.append(Date.logDate.colored(.secondaryLabelColor))
             historyTextView.textStorage?.append(dinfo.colored(.red))
             historyTextView.textStorage?.append(dsym.location, attributes: attr)
             historyTextView.textStorage?.append("\n")
@@ -58,7 +61,8 @@ class AddressAnalysisViewController: NSViewController {
             preUUID = dsym.uuid
         }
 
-        let ainfo = "\(crashAddress)  \(slideAddress)  -->  \(res ?? "")\n"
+        historyTextView.textStorage?.append(Date.logDate.colored(.secondaryLabelColor))
+        let ainfo = "  \(crashAddress)  \(slideAddress)  -->  \(res ?? "")\n"
         historyTextView.textStorage?.append(ainfo)
 
         sender.isEnabled = true
@@ -87,8 +91,9 @@ private extension AddressAnalysisViewController {
 
     @objc func reloadAction() {
         dsymListButton.removeAllItems()
+        dSYMs = dSYMManager.shared.projs.flatMap({ $0.dSYMs })
         dsymListButton.addItems(
-            withTitles: dSYMManager.shared.dSYMs.map({
+            withTitles: dSYMs.map({
                 "\($0.identifier) \($0.version)(\($0.build))"
             })
         )

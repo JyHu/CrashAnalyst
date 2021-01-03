@@ -10,6 +10,15 @@ import Foundation
 
 private let dsymPattern = "UUID:\\s+([\\w-]+)\\s+\\((\\w+)\\)\\s+(.+)$"
 
+class ProjModel {
+    var identifier: String = ""
+    var dSYMs: [dSYMModel] = []
+    
+    init(_ identifier: String) {
+        self.identifier = identifier
+    }
+}
+
 /// 存储dSYM信息的对象
 class dSYMModel {
     /// 打包版本
