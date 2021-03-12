@@ -1,0 +1,79 @@
+{
+	"title": "Xcode",
+	"url": "https://developer.apple.com/documentation/xcode",
+	"summary": "Build, test, and submit your app with Apple's integrated development environment.",
+	"topics": [
+		{
+			"topicName": "Debugging",
+			"topics": [
+				{
+					"title": "Building Your App to Include Debugging Information",
+					"url": "https://developer.apple.com/documentation/xcode/building_your_app_to_include_debugging_information",
+					"summary": "Configure Xcode to produce the symbol information for debugging and crash reports."
+				},
+				{
+					"title": "Diagnosing Issues Using Crash Reports and Device Logs",
+					"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs",
+					"summary": "Use crash reports and device logs to debug app issues.",
+					"topics": [
+						{
+							"topicName": "Essentials",
+							"topics": [
+								{
+									"title": "Acquiring Crash Reports and Diagnostic Logs",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/acquiring_crash_reports_and_diagnostic_logs",
+									"summary": "Gather crash reports and device logs from the App Store, TestFlight, and directly from devices."
+								}
+							]
+						},
+						{
+							"topicName": "Crash Reports",
+							"topics": [
+								{
+									"title": "Adding Identifiable Symbol Names to a Crash Report",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/adding_identifiable_symbol_names_to_a_crash_report",
+									"summary": "Replace hexadecimal addresses in a crash report with function names and line numbers that correspond to your app’s code."
+								},
+								{
+									"title": "Identifying the Cause of Common Crashes",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/identifying_the_cause_of_common_crashes",
+									"summary": "Find patterns in crash reports that identify common problems, and investigate the issue based on the pattern."
+								},
+								{
+									"title": "Analyzing a Crash Report",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/analyzing_a_crash_report",
+									"summary": "Identify clues in a crash report that help you diagnose problems."
+								},
+								{
+									"title": "Examining the Fields in a Crash Report",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/examining_the_fields_in_a_crash_report",
+									"summary": "Understand the structure of a crash report and the information each field contains."
+								},
+								{
+									"title": "Understanding the Exception Types in a Crash Report",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/understanding_the_exception_types_in_a_crash_report",
+									"summary": "Learn what the exception type tells you about why your app crashed."
+								}
+							]
+						},
+						{
+							"topicName": "Device Logs",
+							"topics": [
+								{
+									"title": "Identifying High-Memory Use with Jetsam Event Reports",
+									"url": "https://developer.apple.com/documentation/xcode/diagnosing_issues_using_crash_reports_and_device_logs/identifying_high-memory_use_with_jetsam_event_reports",
+									"summary": "Discover why the operating system terminated your app when available memory was low."
+								},
+								{
+									"title": "Logging",
+									"url": "https://developer.apple.com/documentation/os/logging",
+									"summary": "Capture telemetry from your app for debugging and performance analysis using the unified logging system."
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
