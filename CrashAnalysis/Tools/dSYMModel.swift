@@ -12,10 +12,21 @@ private let dsymPattern = "UUID:\\s+([\\w-]+)\\s+\\((\\w+)\\)\\s+(.+)$"
 
 class ProjModel {
     var identifier: String = ""
-    var dSYMs: [dSYMModel] = []
+    private(set) var dSYMs: [dSYMModel] = []
     
     init(_ identifier: String) {
         self.identifier = identifier
+    }
+    
+    func append(_ dsym: dSYMModel) {
+        dSYMs.append(dsym)
+        dSYMs.sort { (d1, d2) -> Bool in
+            return d1.version.compare(d2.version, options: .numeric) == .orderedAscending
+        }
+    }
+    
+    func remove(_ whereBlock: ((dSYMModel) -> Bool)) {
+        dSYMs.removeAll(where: whereBlock)
     }
 }
 

@@ -25,7 +25,7 @@ class dSYMManager {
     /// 遍历本地Xcode归档数据，添加dSYM
     func loadArchives() {
         projs.removeAll { proj -> Bool in
-            proj.dSYMs.removeAll { dSYM -> Bool in
+            proj.remove { dSYM -> Bool in
                 if dSYM.isImported {
                     return !FileManager.default.fileExists(atPath: dSYM.path)
                 }
@@ -244,10 +244,7 @@ private extension dSYMManager {
             projs.append(proj!)
         }
 
-        proj?.dSYMs.append(dSYM)
-        proj?.dSYMs.sort { (dSYM1, dSYM2) -> Bool in
-            dSYM1.compare(with: dSYM2) == .orderedAscending
-        }
+        proj?.append(dSYM)
 
         return dSYM
     }
