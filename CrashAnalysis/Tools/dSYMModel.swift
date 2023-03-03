@@ -142,6 +142,6 @@ class dSYMModel {
     /// 比较两个dSYM文件
     /// - Returns: 比较的结果
     func compare(with dSYM: dSYMModel) -> ComparisonResult {
-        return compareKey.compare(dSYM.compareKey)
+        return dSYM.compareKey.compare(compareKey, options: .numeric)
     }
 }

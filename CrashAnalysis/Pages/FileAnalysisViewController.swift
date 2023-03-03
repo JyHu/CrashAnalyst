@@ -7,58 +7,112 @@
 
 import Cocoa
 
-class FileAnalysisViewController: NSViewController {
-        
-    @IBOutlet weak var pathButton: NSButton!
-    
-    @IBOutlet weak var analysisButton: NSButton!
-    
-    @IBOutlet weak var dSymButton: NSButton!
-    
+protocol FileDraggingDelegate {
+    func draggingFile(_ fileURL: URL)
+}
+
+class FileDraggingStack: NSStackView {
+    var draggingDelegate: FileDraggingDelegate?
+
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        guard let types = sender.draggingPasteboard.types else {
+            return []
+        }
+
+        return types.contains(.fileURL) ? .copy : []
+    }
+
+    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        let pb = sender.draggingPasteboard
+        if let filePath = pb.propertyList(forType: .fileURL) as? String {
+            if let url = URL(string: filePath) {
+                draggingDelegate?.draggingFile(url)
+                return true
+            }
+        }
+
+        return false
+    }
+}
+
+class FileAnalysisViewController: NSViewController, FileDraggingDelegate {
+    @IBOutlet var pathButton: NSButton!
+    @IBOutlet var analysisButton: NSButton!
+    @IBOutlet var dSymButton: NSButton!
 
     private var bundleIDReg: NSRegularExpression!
-    private var versionReg: NSRegularExpression!
+    private var versionReg1: NSRegularExpression!
+    private var versionReg2: NSRegularExpression!
     private var addressReg: NSRegularExpression!
-    private var bundleAddress: String?
 
-    private var dSYM: dSYMModel?
-    
+    @IBOutlet var actionStack: FileDraggingStack!
+    @IBOutlet var pathStack: FileDraggingStack!
+
+    private var dSYM: dSYMModel? {
+        didSet {
+            guard let dSYM = dSYM else { return }
+
+            pathButton.title = dSYM.location
+
+            let pattern = "\\s+(0x\\w+)\\s+(0x\\w+).*+"
+
+            if let reg = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .anchorsMatchLines]) {
+                addressReg = reg
+                analysisButton.isEnabled = true
+            }
+        }
+    }
+
     @IBOutlet var textView: NSTextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         textView.disableAutomaticOperating()
-        
+
         let options: NSRegularExpression.Options = [.caseInsensitive, .anchorsMatchLines]
         let bundleIDPattern = "^Identifier:\\s+([\\w-\\.]+)$"
         let versionPattern = "^Version:\\s+([\\d\\.]+)\\s*?\\(([\\w]+)\\)"
-        
-        if let reg = try? NSRegularExpression(pattern: bundleIDPattern, options: options) {
+        let versionPattern2 = "^Version:\\s+([\\w]+)\\s*?\\(([\\d\\.]+)\\)"
+
+        if let reg = try? NSRegularExpression(pattern: bundleIDPattern, options: options),
+           let reg1 = try? NSRegularExpression(pattern: versionPattern, options: options),
+           let reg2 = try? NSRegularExpression(pattern: versionPattern2, options: options) {
             bundleIDReg = reg
+            versionReg1 = reg1
+            versionReg2 = reg2
         }
 
-        if let reg = try? NSRegularExpression(pattern: versionPattern, options: options) {
-            versionReg = reg
-        }
-        
         guard let attributedString = FileTips.fileTips else {
             return
         }
-        
+
         textView.textStorage?.setAttributedString(attributedString)
+
+        actionStack.registerForDraggedTypes([.fileURL])
+        actionStack.draggingDelegate = self
+        pathStack.registerForDraggedTypes([.fileURL])
+        pathStack.draggingDelegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(useDSYMAction), name: .useSelectedDSYM, object: nil)
     }
     
+    @objc func useDSYMAction(_ notification: Notification) {
+        guard view.window != nil else { return }
+        guard let dsym = notification.object as? dSYMModel else { return }
+        self.dSYM = dsym
+    }
+
     @IBAction func openDSymPathAction(_ sender: Any) {
         NSWorkspace.shared.open(URL(fileURLWithPath: pathButton.title))
     }
-    
+
     @IBAction func analysisAction(_ sender: Any) {
         let checkingResults = addressReg.matches(in: textView.string)
-        
+
         let text = textView.string
         let attrContent = NSMutableAttributedString(string: text)
-        
+
         for index in 0 ..< checkingResults.count {
             let checkingResult = checkingResults[checkingResults.count - 1 - index]
             guard let crashAddress = text.sub(range: checkingResult.range(at: 1)),
@@ -66,14 +120,14 @@ class FileAnalysisViewController: NSViewController {
                   let code = dSYM?.analysis(slideAddress: slideAddress, crashAddress: crashAddress) else {
                 continue
             }
-            
+
             let insertLoc = checkingResult.range.location + checkingResult.range.length
             attrContent.insert(" \(code)".colored(.red), at: insertLoc)
         }
-        
+
         textView.textStorage?.setAttributedString(attrContent)
     }
-    
+
     @IBAction func findDSymAction(_ sender: Any) {
         analysisButton.isEnabled = false
         pathButton.title = ""
@@ -81,37 +135,41 @@ class FileAnalysisViewController: NSViewController {
 
         let text = textView.string
 
-        guard let idRange = bundleIDReg.firstMatch(in: text)?.range(at: 1) else {
-            return
-        }
-
-        guard let versionCheck = versionReg.firstMatch(in: text) else {
-            return
-        }
-
-        guard
-            let version = text.sub(range: versionCheck.range(at: 1)),
-            let build = text.sub(range: versionCheck.range(at: 2)),
-            let bundleID = textView.string.sub(range: idRange) else {
-            return
-        }
-
-        guard let dSYM = dSYMManager.shared.dSYMFrom(bundleID: bundleID, version: version, build: build) else {
+        guard let idRange = bundleIDReg.firstMatch(in: text)?.range(at: 1),
+              let (version, build) = compileVersion(text),
+              let bundleID = textView.string.sub(range: idRange),
+              let dSYM = dSYMManager.shared.dSYMFrom(bundleID: bundleID, version: version, build: build) else {
             return
         }
 
         self.dSYM = dSYM
-        pathButton.title = dSYM.location
+    }
 
-        let repID = bundleID.replacing(string: ".", target: "\\.")
-        let pattern = "\\s*?\\d+\\s*?\(repID)\\s*?(\\w+)\\s*?(\\w+).*+"
+    func compileVersion(_ string: String) -> (String, String)? {
+        if let versionCheck = versionReg1.firstMatch(in: string) {
+            guard let version = string.sub(range: versionCheck.range(at: 1)),
+                  let build = string.sub(range: versionCheck.range(at: 2)) else {
+                return nil
+            }
 
-        if let reg = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .anchorsMatchLines]) {
-            guard let addresRange = reg.firstMatch(in: text)?.range(at: 1) else { return }
-            guard let address = text.sub(range: addresRange) else { return }
-            analysisButton.isEnabled = true
-            bundleAddress = address
-            addressReg = reg
+            return (version, build)
+        }
+
+        if let versionCheck = versionReg2.firstMatch(in: string) {
+            guard let version = string.sub(range: versionCheck.range(at: 2)),
+                  let build = string.sub(range: versionCheck.range(at: 1)) else {
+                return nil
+            }
+
+            return (version, build)
+        }
+
+        return nil
+    }
+
+    func draggingFile(_ fileURL: URL) {
+        if let content = try? String(contentsOf: fileURL) {
+            textView.string = content
         }
     }
 }
