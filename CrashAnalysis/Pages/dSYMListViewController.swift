@@ -200,10 +200,10 @@ private extension dSYMListViewController {
         let dSYMUrl = URL(fileURLWithPath: dSYM.path)
         attributedString.append("dSYM", attributes: [NSAttributedString.Key.link: dSYMUrl])
 
-        if let dwarfFile = dSYM.dwarfFile {
-            let attr = [NSAttributedString.Key.link: URL(fileURLWithPath: dwarfFile)]
+        for dwarfFile in dSYM.dwarfFiles {
+            let attr = [NSAttributedString.Key.link: URL(fileURLWithPath: dwarfFile.file)]
             attributedString.append("  ")
-            attributedString.append("DWARF", attributes: attr)
+            attributedString.append("DWARF(\(dwarfFile.arch.rawValue))", attributes: attr)
         }
         
         let useAttr = [NSAttributedString.Key.link: _UseIt]
@@ -226,8 +226,8 @@ private extension dSYMListViewController {
         attrInfo.append("Identifier :  \(dSYM.identifier)\n")
         attrInfo.append("Version :  \(dSYM.version)  (\(dSYM.build))\n")
 
-        if let uuid = dSYM.uuid, let arch = dSYM.arch {
-            attrInfo.append("UUID :  \(uuid) (\(arch))\n")
+        for dwarfFile in dSYM.dwarfFiles {
+            attrInfo.append("UUID :  \(dwarfFile.uuid) (\(dwarfFile.arch.rawValue))\n")
         }
 
         if let dateString = dSYM.creationDateString {

@@ -15,6 +15,7 @@ class AddressAnalysisViewController: NSViewController {
     @IBOutlet var noteTextView: NSTextView!
     @IBOutlet var historyTextView: NSTextView!
     @IBOutlet var analysisButton: NSButton!
+    @IBOutlet weak var archPop: NSPopUpButton!
     
     private var dSYMs: [dSYMModel] = []
 
@@ -36,11 +37,12 @@ class AddressAnalysisViewController: NSViewController {
               let crashAddress = legalHexAddress(crashAddressField.stringValue) else {
             return
         }
+        
+        guard let dsym = dsymListButton.selectedItem?.representedObject as? dSYMModel else { return }
 
         sender.isEnabled = false
 
-        let dsym = dSYMs[dsymListButton.indexOfSelectedItem]
-        let res = dsym.analysis(slideAddress: slideAddress, crashAddress: crashAddress)
+        let res = dsym.analysis(slideAddress: slideAddress, crashAddress: crashAddress, arch: selectedArch())
 
         func appendDSYM() {
             let dinfo = "\(dsym.identifier) \(dsym.version)(\(dsym.build)) "
@@ -52,13 +54,13 @@ class AddressAnalysisViewController: NSViewController {
             historyTextView.textStorage?.append("\n")
         }
 
-        if preUUID == nil || dsym.uuid != preUUID {
+        if preUUID == nil || dsym.dwarfFiles.first?.uuid != preUUID {
             if preUUID != nil {
                 historyTextView.textStorage?.append("\n\n")
             }
 
             appendDSYM()
-            preUUID = dsym.uuid
+            preUUID = dsym.dwarfFiles.first?.uuid
         }
 
         historyTextView.textStorage?.append(Date.logDate.colored(.secondaryLabelColor))
@@ -92,10 +94,17 @@ private extension AddressAnalysisViewController {
     @objc func reloadAction() {
         dsymListButton.removeAllItems()
         dSYMs = dSYMManager.shared.projs.flatMap({ $0.dSYMs })
-        dsymListButton.addItems(
-            withTitles: dSYMs.map({
-                "\($0.identifier) \($0.version)(\($0.build))"
-            })
-        )
+        for dSYM in dSYMs {
+            let title = "\(dSYM.identifier) \(dSYM.version)(\(dSYM.build))"
+            dsymListButton.addItem(withTitle: title)
+            dsymListButton.item(withTitle: title)?.representedObject = dSYM
+        }
+    }
+    
+    func selectedArch() -> Arch {
+        if archPop.indexOfSelectedItem == 0 {
+            return .arm64
+        }
+        return .x86_64
     }
 }

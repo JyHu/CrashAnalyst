@@ -19,6 +19,38 @@ class ProjModel {
     }
 }
 
+enum Arch: String {
+    case arm64
+    case x86_64
+    
+    init?(rawValue: String) {
+        if rawValue.uppercased().contains("X86") {
+            self = .x86_64
+        } else {
+            self = .arm64
+        }
+    }
+}
+
+struct DwarfFile {
+    var uuid: String
+    var arch: Arch
+    var file: String
+    
+    private var upperArch: String
+    
+    init(uuid: String, arch: String, file: String) {
+        self.uuid = uuid
+        self.arch = Arch(rawValue: arch) ?? .x86_64
+        self.file = file
+        self.upperArch = arch.uppercased()
+    }
+    
+    func isMatch(_ arch: String) -> Bool {
+        return arch.uppercased() == upperArch
+    }
+}
+
 /// 存储dSYM信息的对象
 class dSYMModel {
     /// 打包版本
@@ -39,11 +71,7 @@ class dSYMModel {
     /// 当前dSYM所在的归档文件所在路径
     var archiveUrl: URL?
 
-    var arch: String?
-
-    var uuid: String?
-
-    var dwarfFile: String?
+    var dwarfFiles: [DwarfFile] = []
 
     /// 是否是外部引入进来的
     var isImported: Bool = false
@@ -97,22 +125,20 @@ class dSYMModel {
     func dump() {
         guard
             let res = execute("dwarfdump --uuid \"\(path)\"") as? String,
-            let reg = try? NSRegularExpression(pattern: dsymPattern, options: .caseInsensitive),
-            let checkingResult = reg.firstMatch(in: res) else {
+            let reg = try? NSRegularExpression(pattern: dsymPattern, options: [.caseInsensitive, .anchorsMatchLines]) else {
             return
         }
-
-        guard
-            let uuid = res.sub(range: checkingResult.range(at: 1)),
-            let arch = res.sub(range: checkingResult.range(at: 2)),
-            let dpath = res.sub(range: checkingResult.range(at: 3)) else {
-            return
+        
+        dwarfFiles = reg.matches(in: res).compactMap { checkingResult -> DwarfFile? in
+            guard
+                let uuid = res.sub(range: checkingResult.range(at: 1)),
+                let arch = res.sub(range: checkingResult.range(at: 2)),
+                let dpath = res.sub(range: checkingResult.range(at: 3)) else {
+                return nil
+            }
+            
+            return DwarfFile(uuid: uuid, arch: arch, file: dpath)
         }
-
-        self.uuid = uuid
-        self.arch = arch
-
-        dwarfFile = dpath
 
         /// 获取cpu类型
         /// dwarfdump --uuid ~/Library/Developer/Xcode/Archives/2020-07-03/Stock-Mac-Release\ 2020-7-3\,\ 9.43\ PM.xcarchive/dSYMs/Tiger\ Trade.app.dSYM
@@ -124,18 +150,15 @@ class dSYMModel {
     ///   - slideAddress: slide address
     ///   - crashAddress: crash address
     /// - Returns: 解析结果
-    func analysis(slideAddress: String, crashAddress: String) -> String? {
-        if self.arch == nil || self.dwarfFile == nil {
+    func analysis(slideAddress: String, crashAddress: String, arch: Arch) -> String? {
+        if self.dwarfFiles.count == 0 {
             dump()
         }
-
-        guard let arch = self.arch,
-              let dwarfFile = self.dwarfFile else {
-            return nil
-        }
-
+        
+        guard let dwarfFile = dwarfFiles.first(where: { $0.arch == arch }) else { return nil }
+        
         return execute(
-            "xcrun atos -arch \(arch) -o \"\(dwarfFile)\" -l \(slideAddress) \(crashAddress)"
+            "xcrun atos -arch \(arch.rawValue) -o \"\(dwarfFile.file)\" -l \(slideAddress) \(crashAddress)"
         ) as? String
     }
 

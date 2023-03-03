@@ -44,6 +44,7 @@ class FileAnalysisViewController: NSViewController, FileDraggingDelegate {
     private var versionReg1: NSRegularExpression!
     private var versionReg2: NSRegularExpression!
     private var addressReg: NSRegularExpression!
+    private var codeTypeReg: NSRegularExpression!
 
     @IBOutlet var actionStack: FileDraggingStack!
     @IBOutlet var pathStack: FileDraggingStack!
@@ -74,13 +75,16 @@ class FileAnalysisViewController: NSViewController, FileDraggingDelegate {
         let bundleIDPattern = "^Identifier:\\s+([\\w-\\.]+)$"
         let versionPattern = "^Version:\\s+([\\d\\.]+)\\s*?\\(([\\w]+)\\)"
         let versionPattern2 = "^Version:\\s+([\\w]+)\\s*?\\(([\\d\\.]+)\\)"
+        let codeTypePattern = "^Code\\s+Type:\\s+(.*?)$"
 
         if let reg = try? NSRegularExpression(pattern: bundleIDPattern, options: options),
            let reg1 = try? NSRegularExpression(pattern: versionPattern, options: options),
-           let reg2 = try? NSRegularExpression(pattern: versionPattern2, options: options) {
+           let reg2 = try? NSRegularExpression(pattern: versionPattern2, options: options),
+           let reg3 = try? NSRegularExpression(pattern: codeTypePattern, options: options) {
             bundleIDReg = reg
             versionReg1 = reg1
             versionReg2 = reg2
+            codeTypeReg = reg3
         }
 
         guard let attributedString = FileTips.fileTips else {
@@ -108,8 +112,12 @@ class FileAnalysisViewController: NSViewController, FileDraggingDelegate {
     }
 
     @IBAction func analysisAction(_ sender: Any) {
+        guard let codeTypeRange = codeTypeReg.firstMatch(in: textView.string)?.range(at: 1) else { return }
+        guard let codeType = textView.string.sub(range: codeTypeRange) else { return }
+        guard let arch = Arch(rawValue: codeType) else { return }
+        
         let checkingResults = addressReg.matches(in: textView.string)
-
+        
         let text = textView.string
         let attrContent = NSMutableAttributedString(string: text)
 
@@ -117,7 +125,7 @@ class FileAnalysisViewController: NSViewController, FileDraggingDelegate {
             let checkingResult = checkingResults[checkingResults.count - 1 - index]
             guard let crashAddress = text.sub(range: checkingResult.range(at: 1)),
                   let slideAddress = text.sub(range: checkingResult.range(at: 2)),
-                  let code = dSYM?.analysis(slideAddress: slideAddress, crashAddress: crashAddress) else {
+                  let code = dSYM?.analysis(slideAddress: slideAddress, crashAddress: crashAddress, arch: arch) else {
                 continue
             }
 

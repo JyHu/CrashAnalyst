@@ -61,7 +61,7 @@ class dSYMManager {
             }
 
             /// 如果没有做过dump，就没有这俩字段
-            if dSYM.uuid == nil || dSYM.arch == nil {
+            if dSYM.dwarfFiles.count == 0 {
                 dSYM.dump()
             }
 

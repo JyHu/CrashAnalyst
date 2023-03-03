@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "C5FC0FAA-3B4D-4BBD-947E-9695DC64E2C0"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D23CD356-2748-4600-B3AC-4663F83C7BDE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrashAnalysis/Pages/dSYMListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "textView(_:clickedOnLink:at:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41528D3D-DBB9-40A2-BB55-FBE00E6518B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrashAnalysis/Pages/dSYMListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "moveDSYMAction(dsym:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "41528D3D-DBB9-40A2-BB55-FBE00E6518B8 - bd9ec88464c74e95"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CrashAnalysis.dSYMListViewController.moveDSYMAction(dsym: CrashAnalysis.dSYMModel) -&gt; Swift.Bool"
+                  moduleName = "CrashAnalysis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jo/Desktop/CrashAnalysis/CrashAnalysis/Pages/dSYMListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "400">
+               </Location>
+               <Location
+                  uuid = "41528D3D-DBB9-40A2-BB55-FBE00E6518B8 - bd9ec88464c74e95"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CrashAnalysis.dSYMListViewController.moveDSYMAction(dsym: CrashAnalysis.dSYMModel) -&gt; Swift.Bool"
+                  moduleName = "CrashAnalysis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jo/Desktop/CrashAnalysis/CrashAnalysis/Pages/dSYMListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "596">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1BFC5DC1-5287-4E52-BD39-3BC650C22583"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrashAnalysis/Pages/AddressAnalysisViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "analysisAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
