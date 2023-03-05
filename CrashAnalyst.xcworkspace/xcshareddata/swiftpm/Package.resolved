@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "sfsymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JyHu/SFSymbols",
+      "state" : {
+        "branch" : "main",
+        "revision" : "88426ae44bb67ac63bd5d9f8345645324002c0fd"
+      }
+    },
+    {
+      "identity" : "swiftextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JyHu/SwiftExtensions",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1483220781095b6bcfca41bd65f417be62a92f31"
+      }
+    }
+  ],
+  "version" : 2
+}
