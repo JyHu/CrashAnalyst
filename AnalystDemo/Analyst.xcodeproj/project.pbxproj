@@ -7,21 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C8032F2329B59BD900F912D0 /* SwiftExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2229B59BD900F912D0 /* SwiftExtensions */; };
+		C8032F2629B59BEE00F912D0 /* SFSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2529B59BEE00F912D0 /* SFSymbols */; };
+		C8032F2929B59C0900F912D0 /* CrashAnalyst in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2829B59C0900F912D0 /* CrashAnalyst */; };
 		C8B9CF4B29B3630200EE430A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF4A29B3630200EE430A /* AppDelegate.swift */; };
 		C8B9CF4F29B3630300EE430A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8B9CF4E29B3630300EE430A /* Assets.xcassets */; };
 		C8B9CF5229B3630300EE430A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B9CF5029B3630300EE430A /* Main.storyboard */; };
-		C8B9CF5B29B3631100EE430A /* CrashAnalyst in Frameworks */ = {isa = PBXBuildFile; productRef = C8B9CF5A29B3631100EE430A /* CrashAnalyst */; };
 		C8B9CF5D29B365D200EE430A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF5C29B365D200EE430A /* MainWindowController.swift */; };
 		C8B9CF5F29B3660F00EE430A /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF5E29B3660F00EE430A /* ProjectListViewController.swift */; };
 		C8B9CF6129B3662300EE430A /* FileAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF6029B3662300EE430A /* FileAnalysisViewController.swift */; };
 		C8B9CF6329B3663800EE430A /* AddressAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF6229B3663800EE430A /* AddressAnalysisViewController.swift */; };
-		C8B9CF6629B36B1700EE430A /* AnalystDependecies in Frameworks */ = {isa = PBXBuildFile; productRef = C8B9CF6529B36B1700EE430A /* AnalystDependecies */; };
 		C8B9CF6829B36E5100EE430A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF6729B36E5100EE430A /* LogViewController.swift */; };
 		C8B9CF6D29B42AF000EE430A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF6C29B42AF000EE430A /* Extensions.swift */; };
 		C8B9CF7029B4394800EE430A /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B9CF6F29B4394800EE430A /* ActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C8032F2029B59BB000F912D0 /* CrashAnalysis */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CrashAnalysis; path = ..; sourceTree = "<group>"; };
+		C8032F2729B59C0000F912D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C8B9CF4729B3630200EE430A /* Analyst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Analyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B9CF4A29B3630200EE430A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B9CF4E29B3630300EE430A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,17 +44,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8B9CF5B29B3631100EE430A /* CrashAnalyst in Frameworks */,
-				C8B9CF6629B36B1700EE430A /* AnalystDependecies in Frameworks */,
+				C8032F2929B59C0900F912D0 /* CrashAnalyst in Frameworks */,
+				C8032F2329B59BD900F912D0 /* SwiftExtensions in Frameworks */,
+				C8032F2629B59BEE00F912D0 /* SFSymbols in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C8032F1F29B59BB000F912D0 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				C8032F2029B59BB000F912D0 /* CrashAnalysis */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		C8B9CF3E29B3630200EE430A = {
 			isa = PBXGroup;
 			children = (
+				C8032F1F29B59BB000F912D0 /* Packages */,
 				C8B9CF4929B3630200EE430A /* Analyst */,
 				C8B9CF4829B3630200EE430A /* Products */,
 				C8B9CF5929B3631100EE430A /* Frameworks */,
@@ -69,6 +82,7 @@
 		C8B9CF4929B3630200EE430A /* Analyst */ = {
 			isa = PBXGroup;
 			children = (
+				C8032F2729B59C0000F912D0 /* Info.plist */,
 				C8B9CF4A29B3630200EE430A /* AppDelegate.swift */,
 				C8B9CF7129B43F3000EE430A /* Controller */,
 				C8B9CF6E29B4393500EE430A /* View */,
@@ -132,8 +146,9 @@
 			);
 			name = Analyst;
 			packageProductDependencies = (
-				C8B9CF5A29B3631100EE430A /* CrashAnalyst */,
-				C8B9CF6529B36B1700EE430A /* AnalystDependecies */,
+				C8032F2229B59BD900F912D0 /* SwiftExtensions */,
+				C8032F2529B59BEE00F912D0 /* SFSymbols */,
+				C8032F2829B59C0900F912D0 /* CrashAnalyst */,
 			);
 			productName = Analyst;
 			productReference = C8B9CF4729B3630200EE430A /* Analyst.app */;
@@ -163,6 +178,10 @@
 				Base,
 			);
 			mainGroup = C8B9CF3E29B3630200EE430A;
+			packageReferences = (
+				C8032F2129B59BD900F912D0 /* XCRemoteSwiftPackageReference "SwiftExtensions" */,
+				C8032F2429B59BEE00F912D0 /* XCRemoteSwiftPackageReference "SFSymbols" */,
+			);
 			productRefGroup = C8B9CF4829B3630200EE430A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,6 +358,7 @@
 				DEVELOPMENT_TEAM = EHNB49T236;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Analyst/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -367,6 +387,7 @@
 				DEVELOPMENT_TEAM = EHNB49T236;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Analyst/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -406,14 +427,39 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C8032F2129B59BD900F912D0 /* XCRemoteSwiftPackageReference "SwiftExtensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JyHu/SwiftExtensions";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		C8032F2429B59BEE00F912D0 /* XCRemoteSwiftPackageReference "SFSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JyHu/SFSymbols";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		C8B9CF5A29B3631100EE430A /* CrashAnalyst */ = {
+		C8032F2229B59BD900F912D0 /* SwiftExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8032F2129B59BD900F912D0 /* XCRemoteSwiftPackageReference "SwiftExtensions" */;
+			productName = SwiftExtensions;
+		};
+		C8032F2529B59BEE00F912D0 /* SFSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8032F2429B59BEE00F912D0 /* XCRemoteSwiftPackageReference "SFSymbols" */;
+			productName = SFSymbols;
+		};
+		C8032F2829B59C0900F912D0 /* CrashAnalyst */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CrashAnalyst;
-		};
-		C8B9CF6529B36B1700EE430A /* AnalystDependecies */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AnalystDependecies;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

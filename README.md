@@ -1,6 +1,12 @@
 # 崩溃解析辅助工具
 
+## 0. 使用说明
 
+```
+dependencies: [
+    .package(url: "https://github.com/JyHu/CrashAnalysis.git", branch: "main")
+]
+```
 
 ## 1. 页面说明
 
