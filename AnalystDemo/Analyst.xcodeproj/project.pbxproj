@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66F33D7A2D42300A006512A4 /* DetactAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F33D792D422FFB006512A4 /* DetactAnalysisViewController.swift */; };
 		C8032F2329B59BD900F912D0 /* SwiftExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2229B59BD900F912D0 /* SwiftExtensions */; };
 		C8032F2629B59BEE00F912D0 /* SFSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2529B59BEE00F912D0 /* SFSymbols */; };
 		C8032F2929B59C0900F912D0 /* CrashAnalyst in Frameworks */ = {isa = PBXBuildFile; productRef = C8032F2829B59C0900F912D0 /* CrashAnalyst */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		66F33D792D422FFB006512A4 /* DetactAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetactAnalysisViewController.swift; sourceTree = "<group>"; };
 		C8032F2029B59BB000F912D0 /* CrashAnalysis */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CrashAnalysis; path = ..; sourceTree = "<group>"; };
 		C8032F2729B59C0000F912D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C8B9CF4729B3630200EE430A /* Analyst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Analyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 				C8B9CF5E29B3660F00EE430A /* ProjectListViewController.swift */,
 				C8B9CF6029B3662300EE430A /* FileAnalysisViewController.swift */,
 				C8B9CF6229B3663800EE430A /* AddressAnalysisViewController.swift */,
+				66F33D792D422FFB006512A4 /* DetactAnalysisViewController.swift */,
 				C8B9CF6729B36E5100EE430A /* LogViewController.swift */,
 			);
 			path = Controller;
@@ -213,6 +216,7 @@
 				C8B9CF6129B3662300EE430A /* FileAnalysisViewController.swift in Sources */,
 				C8B9CF6D29B42AF000EE430A /* Extensions.swift in Sources */,
 				C8B9CF5D29B365D200EE430A /* MainWindowController.swift in Sources */,
+				66F33D7A2D42300A006512A4 /* DetactAnalysisViewController.swift in Sources */,
 				C8B9CF6829B36E5100EE430A /* LogViewController.swift in Sources */,
 				C8B9CF6329B3663800EE430A /* AddressAnalysisViewController.swift in Sources */,
 				C8B9CF7029B4394800EE430A /* ActionButton.swift in Sources */,

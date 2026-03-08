@@ -43,6 +43,8 @@ class AddressAnalysisViewController: NSViewController {
         dsymStack.addView(projPop, in: .leading)
         dsymStack.addView(dsymPop, in: .leading)
         
+        analysedView.isEditable = false
+        analysedView.delegate = self
         analysedView.autoresizingMask = [.width, .height]
         
         let gridView = NSGridView(views: [
@@ -75,6 +77,19 @@ class AddressAnalysisViewController: NSViewController {
     }
 }
 
+extension AddressAnalysisViewController: NSTextViewDelegate {
+    func textView(_ textView: NSTextView, clickedOnLink link: Any, at charIndex: Int) -> Bool {
+        if let url = link as? URL {
+            NSWorkspace.shared.open(url)
+        } else if let url = link as? String {
+            if url.hasPrefix("copyres"), let res = url[10...] {
+                NSPasteboard.general.setString(res, forType: .string)
+            }
+        }
+        return true
+    }
+}
+
 private extension AddressAnalysisViewController {
     func legalHexAddress(_ address: String) -> String? {
         if address.count == 0 {
@@ -92,9 +107,6 @@ private extension AddressAnalysisViewController {
             return addressContent
         }
         
-        
-        
-
         return UInt64(addressContent)?.hexString(prefix: "0x")
     }
     
@@ -126,14 +138,22 @@ private extension AddressAnalysisViewController {
             return
         }
         
+        func secondaryAttr() -> [NSAttributedString.Key: Any] {
+            return [ .font: NSFont.default, .foregroundColor: NSColor.secondaryLabelColor ]
+        }
+        
+        func linkAttr(_ link: Any) -> [NSAttributedString.Key: Any] {
+            return [.font: NSFont.default, .link: link]
+        }
+        
         guard let dsym = dsymPop.selectedItem?.representedObject as? dSYMModel else { return }
 
         func appendDSYM() {
             let dinfo = " \(dsym.bundleID) \(dsym.version)(\(dsym.build))"
 
-            analysedView.textStorage?.append(Date.logDate, attributes: [ .font: NSFont.default, .foregroundColor: NSColor.secondaryLabelColor ])
+            analysedView.textStorage?.append(Date.logDate, attributes: secondaryAttr())
             analysedView.textStorage?.append(dinfo, attributes: [.font: NSFont.default, .foregroundColor: NSColor.red])
-            analysedView.textStorage?.append(dsym.location, attributes: [NSAttributedString.Key.link: URL(fileURLWithPath: dsym.location), .font: NSFont.default])
+            analysedView.textStorage?.append(dsym.location, attributes: linkAttr(URL(fileURLWithPath: dsym.location)))
             analysedView.textStorage?.append("\n")
         }
 
@@ -153,9 +173,21 @@ private extension AddressAnalysisViewController {
             let res = await dsym.analysis(slideAddress: slideAddress, crashAddress: crashAddress, arch: arch)
             
             DispatchQueue.main.async {
-                self.analysedView.textStorage?.append(Date.logDate, attributes: [ .font: NSFont.default, .foregroundColor: NSColor.secondaryLabelColor ])
-                let ainfo = " \(crashAddress) \(slideAddress)  >  \(res ?? "")\n"
+                self.analysedView.textStorage?.append(Date.logDate, attributes: secondaryAttr())
+                let ainfo = " \(crashAddress) \(slideAddress) > \(res ?? "")"
                 self.analysedView.textStorage?.append(ainfo, attributes: [.font: NSFont.default, .foregroundColor: NSColor.textColor])
+                
+                if let res, res.count > 0 {
+                    self.analysedView.textStorage?.append(NSAttributedString(string: " [Copy ", attributes: secondaryAttr()))
+                    self.analysedView.textStorage?.append("Result", attributes: linkAttr("copyres://\(res)"))
+                    self.analysedView.textStorage?.append(NSAttributedString(string: "  ", attributes: secondaryAttr()))
+                    self.analysedView.textStorage?.append("Address+Result", attributes: linkAttr("copyres://\(crashAddress) > \(res)"))
+                    self.analysedView.textStorage?.append(NSAttributedString(string: "]", attributes: secondaryAttr()))
+                    
+                    NSPasteboard.general.setString(res, forType: .string)
+                }
+                
+                self.analysedView.textStorage?.append(NSAttributedString(string: "\n"))
 
                 sender.isEnabled = true
             }
